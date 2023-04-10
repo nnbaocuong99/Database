@@ -1,5 +1,9 @@
 ## How to install DB helm chart using ArgoCD
 
+> [Project](https://github.com/users/nnbaocuong99/projects/2)
+
+---
+
 ### Step 1:
 Ensure that you have a running Kubernetes cluster and have ArgoCD installed and configured to manage your applications.
 
