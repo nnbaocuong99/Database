@@ -13,7 +13,7 @@
     nodeSelector:
       kubernetes.io/hostname: payment-node17
     tolerations:
-      - key: "vn.nextpay/pod"
+      - key: ""
         operator: "Equal"
         value: "storage"
         effect: "NoSchedule"
@@ -22,5 +22,5 @@
       nodePort: 32368
     persistence:
       enabled: true
-      existingClaim: "pvc-my-nextpay-tech-mongodb"
+      existingClaim: ""
 ```
