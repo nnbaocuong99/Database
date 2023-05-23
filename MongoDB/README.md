@@ -1,7 +1,7 @@
 # Using MongoDB
 
  Db config
- ```
+ ```yaml
  mongodb:
     enabled: true
     nameOverride: "mongodb"
