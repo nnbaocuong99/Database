@@ -16,7 +16,7 @@
 4. Configure Argo CD to monitor the Git repository and deploy the chart to your Kubernetes cluster. You can do this by creating an Application resource in Argo CD and specifying the Git repository, chart path, and deployment target (e.g. the Kubernetes namespace).
 
 5. When you want to deploy the database, you can simply update the Helm chart in the Git repository, and Argo CD will automatically detect the changes and apply them to the cluster.
-```
+```yaml
 my-database/
   Chart.yaml
   values.yaml
@@ -27,7 +27,7 @@ my-database/
 ```
 And here's an example of what the Argo CD Application resource might look like:
 
-```
+```yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -60,7 +60,7 @@ Install the ArgoCD CLI tool on your local machine if you haven't done so already
 
 ### Step 3:
 Create a new application in ArgoCD by running the following command in your terminal:
-```
+```bash
 argocd app create <app-name> \
 --repo <git-repo-url> \
 --path <path-to-helm-chart> \
