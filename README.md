@@ -1,4 +1,4 @@
-## How to install DB helm chart using ArgoCD
+## (WIP) How to install DB helm chart using ArgoCD
 
 > - [Project](https://github.com/users/nnbaocuong99/projects/2)
 > - [Issues](https://github.com/nnbaocuong99/Database/issues)
