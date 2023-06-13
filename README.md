@@ -3,7 +3,7 @@
 > - [Project](https://github.com/users/nnbaocuong99/projects/2)
 > - [Issues](https://github.com/nnbaocuong99/Database/issues)
 
----
+<!--
 
 ### To create a database on Kubernetes using Helm and Argo CD, you can follow these steps:
 
@@ -86,4 +86,4 @@ argocd app get <app-name>
 ```
 This command will display the current status of the application deployment.
 
----
+-->
