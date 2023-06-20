@@ -1,9 +1,83 @@
-## (WIP) How to install DB helm chart using ArgoCD
+# How to create MongoDB & Maria DB with `Helm chart` and `ArgoCD`
 
-> - [Project](https://github.com/users/nnbaocuong99/projects/2)
-> - [Issues](https://github.com/nnbaocuong99/Database/issues)
+<br>
 
-Step by Step how to install
+## ❗️ Introducing
+
+### ***Sumary:***
+- **1. About**
+  - **Main topic:** This project will show how to *create, deploy, backup and restore data* on Database (MongoDb and MariaDB in this case) this is not the end and I'm still working on it. This is also my report and 100% on-prem.
+  - VM script by [@TruongLM](https://github.com/lmt2407)
+  - For more infor (`script`, `how to setup`, `run` and `work` with k8s, `tags`,...) check [this repo](https://github.com/nnbaocuong99/k8s)
+
+- **2. Tools:**
+  <details>
+
+   - [Kubernetes](https://kubernetes.io)
+   - [Rancher](https://rancher.com/docs/)
+   - [Apache](https://maven.apache.org)
+   - [Docker](https://www.docker.com)
+   - [Helm](https://helm.sh)
+   - [ArgoCD](https://argo-cd.readthedocs.io/en/stable/)
+   - [Vmbox](https://www.virtualbox.org)
+
+  </details>
+
+- **3. Project / Roadmap:**
+  <details>
+
+   - [Roadmap](https://github.com/nnbaocuong99/Database/projects)
+   - [Project](https://github.com/users/nnbaocuong99/projects/2)
+   - [Issues](https://github.com/nnbaocuong99/Database/issues)
+     
+  </details>
+
+<br>
+
+###  ***Todo list / Workflow to follow (update weekly):***
+- Setup VM
+  - [x] Create `master`
+  - [X] Create `worker` node
+- Create k8s cluster
+   - [x] Create k8s cluster.
+   - [x] Install kubectl and helm.
+
+   - [ ] Setup ArgoCD.
+   - [ ] Setup CI/CD pipline.
+   - [ ] Update (old project) or Create (new project) `chart.yaml` and `values.yaml` to update MongoDb, MariaDB configurations.
+   - [ ] Import data into Database and `backup` and `restore`.
+   - [ ] ?
+   - [ ] ?
+   - [ ] ?
+   - [ ] ?
+   - [ ] ?
+   - [ ] ?
+
+
+
+<br>
+
+## ❗️ Lets working on it
+
+### Part 1: Create VM, Install Docker and create k8s cluster
+
+#### 1. Setup VM
+- Based on my old project In this repo [How to install k8s and CI/CD](https://github.com/nnbaocuong99/k8s) we gonna use the same script to create 2 VM `master` and `worker` node
+- [this](https://github.com/nnbaocuong99/Database/blob/main/VM%20Scripts/README.md)
+
+#### 2. Install Rancher and create k8s cluster
+- Follow [these steps](https://github.com/nnbaocuong99/k8s#-setup)
+
+
+
+
+
+
+
+
+
+
+
 
 
 <!--
