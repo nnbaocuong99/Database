@@ -35,25 +35,38 @@
 <br>
 
 ###  ***Todo list / Workflow to follow (update weekly):***
-- Setup VM
+- Setup VM:
   - [x] Create `master`
   - [X] Create `worker` node
-- Create k8s cluster
-   - [x] Create k8s cluster.
-   - [x] Install kubectl and helm.
 
-   - [ ] Setup ArgoCD.
-   - [ ] Setup CI/CD pipline.
-   - [ ] Update (old project) or Create (new project) `chart.yaml` and `values.yaml` to update MongoDb, MariaDB configurations.
-   - [ ] Import data into Database and `backup` and `restore`.
-   - [ ] ?
-   - [ ] ?
-   - [ ] ?
-   - [ ] ?
-   - [ ] ?
-   - [ ] ?
+- Create k8s cluster:
+  - [x] Create k8s cluster ([guides here](https://github.com/nnbaocuong99/k8s#--install-rancher--setup-k8s-cluster))
+  - [x] Install kubectl and helm.
 
+- Setup ArgoCD:
+  - [ ] Change type to `Load Balancer`
+  - [ ] Change the `port-forward` svc to `node-port`
 
+- Setup CI:
+  - [ ] Add `Variables`
+  - [ ] Register `GitLab Runner` 
+
+- Setup CD:
+  - [ ] Connect repo (Recommend Gitlab)
+  - [ ] Create `Chart.yaml` and `values.yaml` / Update the configurations
+    - [ ] Old project: Find a way to update `.yaml` file for ArgoCD to read and create the DB
+    - [ ] New project: Create a new chart file with the default config of the `MongoDb` and `MaridaDB`
+
+- Create Database:
+  - [ ] `Add dependencies`
+  - [ ] Config the `values.yaml`
+  - [ ] Deploy, connect into it.
+
+- Pratices / Dump data
+  - [ ] Import data into Database using [Mockaroo](https://www.mockaroo.com/)
+  - [ ] `backup` and `restore` ([command from official website]())
+
+- *Still updating*
 
 <br>
 
@@ -81,6 +94,24 @@
 
 
 <!--
+
+  
+  #dump / backup
+  ```ruby
+  mongodump -h sample.mongodbhost.com:27017 -d DATABASE_NAME -u USER_NAME -p SAMPLE_PASSWORD -o ~/Desktop
+  ``` 
+
+  #restore
+  ```ruby
+  mongorestore --host sample.mongohost.com --port 27017 --username USER_NAME --password SAMPLE_PASSWORD --db DATABASE_NAME .
+  ```
+
+
+
+
+
+
+
 
 ### To create a database on Kubernetes using Helm and Argo CD, you can follow these steps:
 
