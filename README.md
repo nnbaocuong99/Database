@@ -4,7 +4,7 @@
 
 ## ❗️ Introducing
 
-### ***Sumary:***
+### ***1. Sumary:***
 - **About**
   - **Main topic:** This project will show how to *create, deploy, backup and restore data* on Database (MongoDb and MariaDB in this case) this is not the end and I'm still working on it. This is also my report and 100% on-prem.
   - VM script by [@TruongLM](https://github.com/lmt2407)
