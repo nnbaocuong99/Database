@@ -5,12 +5,12 @@
 ## ❗️ Introducing
 
 ### ***Sumary:***
-- **1. About**
+- **About**
   - **Main topic:** This project will show how to *create, deploy, backup and restore data* on Database (MongoDb and MariaDB in this case) this is not the end and I'm still working on it. This is also my report and 100% on-prem.
   - VM script by [@TruongLM](https://github.com/lmt2407)
   - For more infor (`script`, `how to setup`, `run` and `work` with k8s, `tags`,...) check [this repo](https://github.com/nnbaocuong99/k8s)
 
-- **2. Tools:**
+- **Tools:**
   <details>
 
    - [Kubernetes](https://kubernetes.io)
@@ -23,7 +23,7 @@
 
   </details>
 
-- **3. Project / Roadmap:**
+- **Project / Roadmap:**
   <details>
 
    - [Roadmap](https://github.com/nnbaocuong99/Database/projects)
