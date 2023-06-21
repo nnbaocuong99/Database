@@ -47,9 +47,9 @@
   - [ ] Change type to `Load Balancer`
   - [ ] Change the `port-forward` svc to `node-port`
 
-- Setup CI:
-  - [ ] Add `Variables`
-  - [ ] Register `GitLab Runner` 
+- ~~Setup CI:~~
+  - ~~[ ] Add `Variables`~~
+  - ~~[ ] Register `GitLab Runner`~~
 
 - Setup CD:
   - [ ] Connect repo (Recommend Gitlab)
