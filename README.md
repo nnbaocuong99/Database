@@ -48,8 +48,8 @@
   - [ ] Change the `port-forward` svc to `node-port`
 
 - ~~Setup CI:~~
-  - ~~[ ] Add `Variables`~~
-  - ~~[ ] Register `GitLab Runner`~~
+  - [ ] ~~Add `Variables`~~
+  - [ ] ~~Register `GitLab Runner`~~
 
 - Setup CD:
   - [ ] Connect repo (Recommend Gitlab)
