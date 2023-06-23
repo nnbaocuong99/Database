@@ -1,7 +1,7 @@
  # Using MongoDB | Installations docs
 
- - Configuration:
-###### `Chart.yaml` (add dependencies)
+### 1. Configuration:
+- `Chart.yaml` (add dependencies)
  ```yaml
 apiVersion: v2
 name: demo-app
@@ -41,7 +41,7 @@ dependencies:
 
 <br>
 
-###### `values.yaml` (add dependencies)
+- `values.yaml` (config)
 ```yaml
 # Default values for demo-app.
 # This is a YAML-formatted file.
@@ -174,17 +174,33 @@ mongodb:
 #   volumePermissions:
 #     enabled: true
 ```
+### Commit it on ArgoCd
+![image](https://github.com/nnbaocuong99/Database/assets/100349044/4755f8cf-92c2-441f-b480-45a317eb8e7e)
 
----
+### `Dump` and `Restore` data MongoDB
+Assuming that we have a remote MongoDB machine running and wish to create a snapshot of that database on a local machine, this can be done using the mongodump command on the primary node. We just need to indicate the host and port number (the default is port 27017) for the remote server, and provide some argument parameters like the name of the database, our user name, and our password. Finally, we indicate the dump directory we want to create the snapshot in.
+
+```ruby
+mongodump -h sample.mongodbhost.com:27017 -d DATABASE_NAME -u USER_NAME -p SAMPLE_PASSWORD -o ~/Desktop
+```
+
+One of the best practices of backing up large databases is splitting them up. You can pass a query into mongodump using the --query parameter so that you, in case of a failure, are able to use some kind of timestamp/ordering field in your collection to resume the backup process.
+
+In order to restore a database with a saved snapshot, we just have to use the mongorestore command. It restores data by connecting to a running mongod directly. You can limit the output from the database by running restore in quiet mode using the --quiet option. Once more, we provide the MongoDB host and port, along with the user name, database name, and password. Finally, we provide the output directory.
+
+```ruby
+mongorestore --host sample.mongohost.com --port 27017 --username USER_NAME --password SAMPLE_PASSWORD --db DATABASE_NAME .
+```
+MongoDB enables users to back up and restore their databases. A database can be backed up and restored using either MongoDB backup and restore utilities or the cloud database platform MongoDB Atlas.
 
 
 
-### How to Back Up and Restore MongoDB
 <!--
+### How to Back Up and Restore MongoDB
 <details>
 <summary><samp>&#9776;</samp> click to expand <Back Up and Restore MongoDB> </summary>
 <br>
--->
+
 #### 1. This repo will cover the following:
 - Back up and restore with the [MongoDB tools](https://www.mongodb.com/docs/manual/tutorial/backup-and-restore-tools/?_ga=2.156187707.1254817124.1686623984-2025668380.1686623984)
 - Back up and restore using [MongoDB Atlas](https://www.mongodb.com/docs/manual/core/backups/?_ga=2.156187707.1254817124.1686623984-2025668380.1686623984#back-up-with-atlas)
@@ -267,11 +283,6 @@ After ensuring that the Atlas cluster of choice can’t receive client requests 
   Now, let’s look at how to back up and restore using the MongoDB utilities.
   </div>
 
-
-
-
-
-
 #### 8. Using MongoDB Backup and Restore Tools
 Assuming that we have a remote MongoDB machine running and wish to create a snapshot of that database on a local machine, this can be done using the mongodump command on the primary node. We just need to indicate the host and port number (the default is port 27017) for the remote server, and provide some argument parameters like the name of the database, our user name, and our password. Finally, we indicate the dump directory we want to create the snapshot in.
 
@@ -288,10 +299,6 @@ mongorestore --host sample.mongohost.com --port 27017 --username USER_NAME --pas
 ```
 MongoDB enables users to back up and restore their databases. A database can be backed up and restored using either MongoDB backup and restore utilities or the cloud database platform MongoDB Atlas.
 
-<!--
 <br>
 </details>
 -->
-
-
-
