@@ -44,20 +44,20 @@
   - [x] Install kubectl and helm.
 
 - Setup ArgoCD:
-  - [ ] Change type to `Load Balancer`
-  - [ ] Change the `port-forward` svc to `node-port`
+  - [x] Change type to `Load Balancer`
+  - [x] Change the `port-forward` svc to `node-port`
 
 - ~~Setup CI:~~
   - [ ] ~~Add `Variables`~~
   - [ ] ~~Register `GitLab Runner`~~
 
 - Setup CD:
-  - [ ] Connect repo (Recommend Gitlab)
-  - [ ] Create `Chart.yaml` and `values.yaml` / Update the configurations
-    - [ ] Old project: Find a way to update `.yaml` file for ArgoCD to read and create the DB
-    - [ ] New project: Create a new chart file with the default config of the `MongoDb` and `MaridaDB`
+  - [x] Connect repo (Recommend Gitlab)
+  - [x] Create `Chart.yaml` and `values.yaml` / Update the configurations
+    - [x] Old project: Find a way to update `.yaml` file for ArgoCD to read and create the DB
+    - [x] New project: Create a new chart file with the default config of the `MongoDb` and `MaridaDB`
 
-- Create Database:
+- Create Database both `MongoDb` and `MariaDB`:
   - [ ] `Add dependencies`
   - [ ] Config the `values.yaml`
   - [ ] Deploy, connect into it.
