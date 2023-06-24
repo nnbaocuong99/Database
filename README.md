@@ -45,7 +45,7 @@
 
 - Setup ArgoCD:
   - [x] Change type to `Load Balancer`
-  - [x] Change the `port-forward` svc to `node-port`
+  - [x] Change the `port-forward` svc to ~~`node-port`~~ (connect using `wokernode-port`)
 
 - ~~Setup CI:~~
   - [ ] ~~Add `Variables`~~
@@ -81,11 +81,31 @@
 #### 2. Install Rancher and create k8s cluster
 - Follow [these steps](https://github.com/nnbaocuong99/k8s#-setup)
 
+### Part 2: Setup ArgoCD / CI/CD / Create Database
+#### 1. Setup ArgoCD
+- Follow [these steps](https://github.com/nnbaocuong99/k8s#-setup-argocd-) to setup ArgoCD / if your're started a brand new project check my [old project](https://github.com/nnbaocuong99/k8s)
+- Change it to `LoadBalancer`
+```ruby
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+```
 
+#### 2. Setup CI/CD:
+- Setup `CI` check [this](https://github.com/nnbaocuong99/k8s#-ci)
+- Setup `CD`
+  - Get into your ArgoCD, `Settings` -> `Add Repository` and add your repo and `helm` repo to update the config for helm
+  - Fill them form like the 1st picture and and you will see the exactly the same with the 2nd picture
+    > Repo link to copy: `https://charts.bitnami.com/bitnami`
+    <img src="https://github.com/nnbaocuong99/Database/assets/100349044/2d716984-5e90-4d2c-b395-70749bcf406c" alt="uvu" width="800">
+    <img src="https://github.com/nnbaocuong99/Database/assets/100349044/490dd351-51e4-4ad7-a3b6-b92749f43cab" alt="uvu" width="800">
+- Crea
 
+- Update the `Chart.yaml` and `values.yaml` 
+  - If you're started a brand new project check these: [MariaDB](https://artifacthub.io/packages/helm/bitnami/mariadb) and [MongoDB](https://artifacthub.io/packages/helm/bitnami/mongodb) chart
+  - If you're following the way to update from the old one, copy 2 `.yaml` file below 
 
+<br>
 
-
+> `Chart.yaml`
 
 
 
