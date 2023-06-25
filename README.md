@@ -60,7 +60,8 @@
 - Create Database both `MongoDb` and `MariaDB`:
   - [x] `Add dependencies`
   - [x] Config the `values.yaml`
-  - [ ] Deploy, connect into it.
+  - [x] Apply and deploy the Databases 
+  - [ ] Download tool, connect into and work with it.
 
 - Pratices / Dump data
   - [ ] Import data into Database using [Mockaroo](https://www.mockaroo.com/)
