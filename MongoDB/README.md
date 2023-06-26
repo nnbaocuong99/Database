@@ -1,5 +1,29 @@
- # Using MongoDB | Installations docs
+# Using MongoDB | Installations docs
 
+## Tools / How to work with MongoDB
+
+### Windows
+#### 1. Download the Database Tools MSI installer.
+- Open the [MongoDB Download Center](https://www.mongodb.com/try/download/database-tools?tck=docs_databasetools), using the drop-down menu:
+  - Select the `Windows x86_64` Platform
+  - Select the msi Package
+  - Click the Download button
+
+#### 2. Run the MSI installer, during the install you may customize the installation directory.
+
+#### 3. Make the DB Tools available in your PATH.
+- Once you've installed the Database Tools, follow the instructions below to add the install directory to your system's PATH environment variable.:
+  - Open the ` Control Panel` 
+  - In the ` System and Security` category, click ` System` 
+  - Click ` Advanced system settings` . The System Properties modal displays.
+  - Click ` Environment Variables` 
+  - In the ` System variables`  section, select ` Path`  and click `Edit` . The Edit environment variable modal displays.
+  - Click ` New`  and `add the filepath to the location *where you installed the Database Tools*.
+ 
+
+
+ 
+<!--
 ### 1. Configuration:
 - `Chart.yaml` (add dependencies)
  ```yaml
