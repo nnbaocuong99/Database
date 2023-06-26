@@ -2,7 +2,11 @@
 
 ## Tools / How to work with MongoDB
 
-### Windows
+### 1. Windows
+<details>
+<summary><samp>&#9776;</samp> Click to expand </summary>
+<br>
+
 #### 1. Download the Database Tools MSI installer.
 - Open the [MongoDB Download Center](https://www.mongodb.com/try/download/database-tools?tck=docs_databasetools), using the drop-down menu:
   - Select the `Windows x86_64` Platform
@@ -21,8 +25,106 @@
   - Click ` New`  and `add the filepath to the location *where you installed the Database Tools*.
  
 
+<br>
+</details>
 
- 
+<br>
+
+### 2. MacOS
+
+<details>
+<summary><samp>&#9776;</samp> Click to expand </summary>
+<br>
+
+> **Warning** Starting with MongoDB 4.4.1, [installing the MongoDB Server via Homebrew](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/#std-label-install-with-homebrew) also installs the Database Tools. The following command will determine if the Database Tools are already installed on your system:
+> ```bash
+> brew list | grep mongodb-database-tools
+> ```
+
+#### 1. Install Homebrew.
+macOS does not include the Homebrew brew package by default. Install brew: [Homebrew installation instructions](https://brew.sh/#install)
+
+#### 2. Tap the MongoDB formula.
+In your macOS Terminal, run the following command to download the official 
+[MongoDB Homebrew formulae](https://github.com/mongodb/homebrew-brew) for MongoDB and the Database Tools:
+```ruby
+brew tap mongodb/brew
+```
+
+#### 3. Install the MongoDB Database Tools.
+In your macOS Terminal, run the following command to install the MongoDB Database Tools:
+```ruby
+brew install mongodb-database-tools
+```
+
+> Once installed, you can later update the Database Tools with:
+> ```ruby
+> brew upgrade mongodb-database-tools
+> ```
+
+<br>
+</details>
+
+<br>
+
+### 3. Linux
+
+<details>
+<summary><samp>&#9776;</samp> Click to expand </summary>
+
+<br>
+
+The MongoDB Database Tools can be installed with your Linux distribution's package manger or downloaded as a .tgz archive. Select the appropriate tab based on your Linux distribution and desired package from the tabs below:
+
+- To install the `.deb package` on Ubuntu and Debian, click the DEB Package tab.
+- To install the `.rpm package` on RHEL / CentOS / SUSE, click the RPM Package tab.
+- To install the `.tgz` tarball, click the TGZ Archive tab.
+
+`.deb package`
+> **Warning** If you have already installed the MongoDB Server via your system's package manager, you likely already have the Database Tools installed. The following command will determine if the Database Tools are already installed on your system:
+> ```ruby
+> sudo dpkg -l mongodb-database-tools
+> ```
+#### 1. Download the Database Tools `.deb package`
+Open the [MongoDB Download Center](https://www.mongodb.com/try/download/database-tools?tck=docs_databasetools). Using the drop-down menu:
+- Select your Linux Platform and Architecture
+- Select the deb Package
+- Click the Download button
+
+> If installing on a headless, click `Copy Link` then use a command line tool such as `wget` or `curl` to download the `.deb` directly on your Linux system.
+
+#### 2. Install the downloaded package.
+Navigate to the directory containing the downloaded .deb package, then run the following command to install the Database Tools using the apt package manager:
+```ruby
+sudo apt install ./mongodb-database-tools-*-100.7.1.deb
+```
+
+<br>
+
+`.RPM package`
+> **Warning** If you have already installed the MongoDB Server via your system's package manager, you likely already have the Database Tools installed. The following command will determine if the Database Tools are already installed on your system:
+> ```ruby
+> sudo yum list installed mongodb-database-tools
+> ```
+#### 1. Download the Database Tools .rpm package.
+Open the 
+[MongoDB Download Center](https://www.mongodb.com/try/download/database-tools?tck=docs_databasetools)
+. Using the drop-down menu on the right-hand side of the page:
+
+Select your Linux Platform and Architecture
+
+Select the rpm Package
+
+Click the Download button
+
+If installing on a headless Linux system, click Copy Link to the right of the Download button to copy the download link, then use a command line tool such as wget or curl to download the .rpm directly on your Linux system.
+
+2
+Install the downloaded package.
+Navigate to the directory containing the downloaded .rpm package, then run the following command to install the Database Tools using the yum package manager:
+
+sudo yum install -y mongodb-database-tools-*-100.7.1.rpm
+
 <!--
 ### 1. Configuration:
 - `Chart.yaml` (add dependencies)
