@@ -1,4 +1,4 @@
 # Using MariaDB
 
 
-## Tools to work with MariaDB
+## Tools / How to work with MariaDB
