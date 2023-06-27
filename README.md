@@ -61,10 +61,11 @@
   - [x] `Add dependencies`
   - [x] Config the `values.yaml`
   - [x] Apply and deploy the Databases 
-  - [ ] Download tool, connect into and work with it.
+  - [x] Download tool, connect into and work with it.
 
 - Pratices / Dump data
-  - [ ] Import data into Database using [Mockaroo](https://www.mockaroo.com/)
+  - [x] Use [Mockaroo](https://www.mockaroo.com/) to genarate data and save it as `.CSV`, `JSON` or any compatible data type
+  - [ ] Insert / Import data into Database
   - [ ] `backup` and `restore` ([command from official website]())
 
 - *Still updating*
@@ -107,175 +108,181 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
   - If you're started a brand new project check these: [MariaDB](https://artifacthub.io/packages/helm/bitnami/mariadb) and [MongoDB](https://artifacthub.io/packages/helm/bitnami/mongodb) chart
   - If you're following the way to update from the old one, copy 2 `.yaml` file below 
 
-- Chart.yaml
-```yaml
-apiVersion: v2
-name: demo-app
-description: A Helm chart for Kubernetes
+- my raw `Chart.yaml` config file to copy
 
-# A chart can be either an 'application' or a 'library' chart.
-#
-# Application charts are a collection of templates that can be packaged into versioned archives
-# to be deployed.
-#
-# Library charts provide useful utilities or functions for the chart developer. They're included as
-# a dependency of application charts to inject those utilities and functions into the rendering
-# pipeline. Library charts do not define any templates and therefore cannot be deployed.
-type: application
+  <details>
 
-# This is the chart version. This version number should be incremented each time you make changes
-# to the chart and its templates, including the app version.
-# Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 0.1.0
+  ```yaml
+  apiVersion: v2
+  name: demo-app
+  description: A Helm chart for Kubernetes
 
-# This is the version number of the application being deployed. This version number should be
-# incremented each time you make changes to the application. Versions are not expected to
-# follow Semantic Versioning. They should reflect the version the application is using.
-# It is recommended to use it with quotes.
-appVersion: "1.16.0"
+  # A chart can be either an 'application' or a 'library' chart.
+  #
+  # Application charts are a collection of templates that can be packaged into versioned archives
+  # to be deployed.
+  #
+  # Library charts provide useful utilities or functions for the chart developer. They're included as
+  # a dependency of application charts to inject those utilities and functions into the rendering
+  # pipeline. Library charts do not define any templates and therefore cannot be deployed.
+  type: application
 
-dependencies:
-  - name: mariadb
-    version: 11.0.11
-    repository: https://charts.bitnami.com/bitnami
-    condition: mariadb.enabled
-  - name: mongodb
-    version: 12.1.16
-    repository: https://charts.bitnami.com/bitnami
-    condition: mongodb.enabled
-```
+  # This is the chart version. This version number should be incremented each time you make changes
+  # to the chart and its templates, including the app version.
+  # Versions are expected to follow Semantic Versioning (https://semver.org/)
+  version: 0.1.0
 
-<br>
+  # This is the version number of the application being deployed. This version number should be
+  # incremented each time you make changes to the application. Versions are not expected to
+  # follow Semantic Versioning. They should reflect the version the application is using.
+  # It is recommended to use it with quotes.
+  appVersion: "1.16.0"
 
-- `values.yaml`
-```yaml
-# Default values for demo-app.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+  dependencies:
+    - name: mariadb
+      version: 11.0.11
+      repository: https://charts.bitnami.com/bitnami
+      condition: mariadb.enabled
+    - name: mongodb
+      version: 12.1.16
+      repository: https://charts.bitnami.com/bitnami
+      condition: mongodb.enabled
+  ```
 
-replicaCount: 1
+  </details>
 
-image:
-  repository: nnbaocuong99/demo-gitlabci
-  pullPolicy: Always
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: "1.0"
+- my raw `values.yaml` config file to copy
 
-imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
+  <details>
 
-serviceAccount:
-  # Specifies whether a service account should be created
-  create: true
-  # Annotations to add to the service account
-  annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
-  name: ""
+  ```yaml
+  # Default values for demo-app.
+  # This is a YAML-formatted file.
+  # Declare variables to be passed into your templates.
 
-podAnnotations: {}
+  replicaCount: 1
 
-podSecurityContext: {}
-  # fsGroup: 2000
+  image:
+    repository: nnbaocuong99/demo-gitlabci
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "1.0"
 
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+  imagePullSecrets: []
+  nameOverride: ""
+  fullnameOverride: ""
 
-service:
-  type: NodePort
-  port: 80
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: true
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
 
-ingress:
-  enabled: false
-  className: ""
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  hosts:
-    - host: chart-example.local
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+  podAnnotations: {}
 
-resources:
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  limits:
-    cpu: 100m
-    memory: 128Mi
-  requests:
-    cpu: 100m
-    memory: 128Mi
+  podSecurityContext: {}
+    # fsGroup: 2000
 
-autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
 
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
-
-mongodb:
-  enabled: true
-  nameOverride: "mongodb"
-  fullnameOverride: "mongodb"
-  architecture: "standalone"
-  auth:
-    rootUser: "admin"
-    rootPassword: "erdG8qxerVfMPxTd8VHs"
   service:
     type: NodePort
-    nodePort: 32368
-  persistence:
-    enabled: false
-    #existingClaim: "pvc-my-nextpay-tech-mongodb"
+    port: 80
 
-mariadb:
-  enabled: true
-  image:
-    debug: true
-  nameOverride: "mariadb"
-  fullnameOverride: "mariadb"
-  architecture: "standalone"
-  auth:
-    rootPassword: "44Xb7YDFgKHgp7kYLXzb"
-    password: "rL43Ydk8DmYUKYmurML3"
-  primary:
-    resources:
-      # requests:
-      #   cpu: "1000m"
-      #   memory: "1536Mi"
-      # limits:
-      #   cpu: "1000m"
-      #   memory: "1536Mi"
+  ingress:
+    enabled: false
+    className: ""
+    annotations: {}
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: chart-example.local
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
+
+  resources:
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+  mongodb:
+    enabled: true
+    nameOverride: "mongodb"
+    fullnameOverride: "mongodb"
+    architecture: "standalone"
+    auth:
+      rootUser: "admin"
+      rootPassword: "erdG8qxerVfMPxTd8VHs"
     service:
       type: NodePort
-      nodePort: 32268
+      nodePort: 32368
     persistence:
       enabled: false
-      #existingClaim: "pvc-my-nextpay-tech-mariadb"
-  volumePermissions:
+      #existingClaim: "pvc-my-nextpay-tech-mongodb"
+
+  mariadb:
     enabled: true
-```
+      image:
+      debug: true
+    nameOverride: "mariadb"
+    fullnameOverride: "mariadb"
+    architecture: "standalone"
+     auth:
+      rootPassword: "44Xb7YDFgKHgp7kYLXzb"
+      password: "rL43Ydk8DmYUKYmurML3"
+    primary:
+      resources:
+        # requests:
+        #   cpu: "1000m"
+        #   memory: "1536Mi"
+        # limits:
+        #   cpu: "1000m"
+        #   memory: "1536Mi"
+      service:
+        type: NodePort
+        nodePort: 32268
+      persistence:
+        enabled: false
+        #existingClaim: "pvc-my-nextpay-tech-mariadb"
+    volumePermissions:
+      enabled: true
+  ```
 
-
+  </details>
 
 <!--
 
