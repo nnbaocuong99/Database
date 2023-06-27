@@ -64,12 +64,11 @@
  
 
 - Pratices / Dump data
-  - [x] Download tool, connect into and work with it.
+  - [x] Download tool, test connection.
+  - [x] Create Database. table.
   - [x] Use [Mockaroo](https://www.mockaroo.com/) to genarate data and save it as `.CSV`, `JSON` or any compatible data type
-  - [ ] Insert / Import data into Database
-  - [ ] `backup` and `restore` ([command from official website]())
-
-- *Still updating*
+  - [x] Insert / Import data into Database
+  - [ ] Practice: `backup`, `drop` table and then `restore
 
 <br>
 
@@ -284,6 +283,46 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
   ```
 
   </details>
+
+<br>
+
+### Part 3: Work with Db, practices
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!--
 
