@@ -1,7 +1,16 @@
 # Using MongoDB | Installations docs
 
-## Tools / How to work with MongoDB
+## Chart template for mongodb
+Replace `x` with the version you desired
+```yaml
+dependencies:
+  - name: mongodb
+    version: x.x.x
+    repository: https://charts.bitnami.com/bitnami
+    condition: mongodb.enabled
+```
 
+## Tools / How to work with MongoDB
 ### 1. Windows
 <details>
 <summary><samp>&#9776;</samp> Click to expand </summary>
