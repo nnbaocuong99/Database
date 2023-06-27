@@ -34,7 +34,7 @@
 
 <br>
 
-###  ***Todo list / Workflow to follow (update weekly):***
+###  ***2. Todo list / Workflow to follow (update weekly):***
 - Setup VM:
   - [x] Create `master`
   - [X] Create `worker` node
