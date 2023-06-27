@@ -284,12 +284,12 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
 
   </details>
 
-- `Commit` and refresh 
+- `Commit` and refresh and your will have a Database in your k8s cluster
 
 <br>
 
 ### Part 3: Work with Db, practices
-
+- Okay, so once you have done all these steps upthere, now you'll have a Database in your k8s cluster. To make sure about that
 
 
 
