@@ -60,10 +60,11 @@
 - Create Database both `MongoDb` and `MariaDB`:
   - [x] `Add dependencies`
   - [x] Config the `values.yaml`
-  - [x] Apply and deploy the Databases 
-  - [x] Download tool, connect into and work with it.
+  - [x] Apply and deploy the Databases on k8s
+ 
 
 - Pratices / Dump data
+  - [x] Download tool, connect into and work with it.
   - [x] Use [Mockaroo](https://www.mockaroo.com/) to genarate data and save it as `.CSV`, `JSON` or any compatible data type
   - [ ] Insert / Import data into Database
   - [ ] `backup` and `restore` ([command from official website]())
