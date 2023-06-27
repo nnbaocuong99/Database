@@ -1,7 +1,9 @@
 # Using MongoDB | Installations docs
 
-## Chart template for mongodb
-Replace `x` with the version you desired
+## `.yaml` template
+> Replace `x` with the version you desired
+### MongoDB
+#### `Chart.yaml`
 ```yaml
 dependencies:
   - name: mongodb
@@ -9,6 +11,33 @@ dependencies:
     repository: https://charts.bitnami.com/bitnami
     condition: mongodb.enabled
 ```
+
+#### `values.yaml`
+```yaml
+mongodb:
+    enabled: true
+    nameOverride:
+    fullnameOverride:
+    architecture:
+    auth:
+      rootUser:
+      rootPassword:
+    nodeSelector:
+      kubernetes.io/hostname:
+    tolerations:
+      - key:
+        operator:
+        value:
+        effect:
+    service:
+      type:
+      nodePort:
+    persistence:
+      enabled:
+      existingClaim:
+```
+
+<br>
 
 ## Tools / How to work with MongoDB
 ### 1. Windows
