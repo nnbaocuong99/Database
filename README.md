@@ -289,8 +289,14 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
 <br>
 
 ### Part 3: Work with Db, practices
-- Okay, so once you have done all these steps upthere, now you'll have a Database in your k8s cluster. To make sure about that
+#### Download tools
+- Okay, so once you have done all these steps upthere, now you'll have a Database in your k8s cluster. To make sure about that we need to download tools to test the connection and you can move to the next step
+- With:
+  - MariaDB: You need to download **`mySQL`** to test your connection. and **`mySQLdump`** to dump and restore your data. For installation check [my guides](https://github.com/nnbaocuong99/Database/tree/main/MariaDB)
+  - MongoDB: About the test connection there are so many options so you can decide it, `dump` and `restore` You need to download MongoDatabaseTools. For installation check [my guides](https://github.com/nnbaocuong99/Database/tree/main/MongoDB)
 
+#### `exec` into, create database and table
+- 
 
 
 
