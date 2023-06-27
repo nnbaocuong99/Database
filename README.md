@@ -66,15 +66,15 @@
 - Pratices / Dump data
   - [x] Download tool, test connection.
   - [x] Create Database. table.
-  - [x] Use [Mockaroo](https://www.mockaroo.com/) to genarate data and save it as `.CSV`, `JSON` or any compatible data type
-  - [x] Insert / Import data into Database
-  - [ ] Practice: `backup`, `drop` table and then `restore
+  - [x] Genarate data.
+  - [x] Insert / Import data into Database.
+  - [ ] Practice: `backup`, `drop` table and then `restore.
 
 <br>
 
 ## ❗️ Lets working on it
 
-### Part 1: Create VM, Install Docker and create k8s cluster
+### ✏️Part 1: Create VM, Install Docker and create k8s cluster
 
 #### 1. Setup VM
 - Based on my old project In this repo [How to install k8s and CI/CD](https://github.com/nnbaocuong99/k8s) we gonna use the same script to create 2 VM `master` and `worker` node
@@ -85,7 +85,7 @@
 
 <br>
 
-### Part 2: Setup ArgoCD / CI/CD / Create Database
+### ✏️Part 2: Setup ArgoCD / CI/CD / Create Database
 #### 1. Setup ArgoCD
 - Follow [these steps](https://github.com/nnbaocuong99/k8s#-setup-argocd-) to setup ArgoCD / if your're started a brand new project check my [old project](https://github.com/nnbaocuong99/k8s)
 - Change it to `LoadBalancer`
@@ -288,14 +288,18 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
 
 <br>
 
-### Part 3: Work with Db, practices
-#### Download tools
+### ✏️Part 3: Work with Db, practices
+#### 1. Download tools
 - Okay, so once you have done all these steps upthere, now you'll have a Database in your k8s cluster. To make sure about that we need to download tools to test the connection and you can move to the next step
 - With:
   - MariaDB: You need to download **`mySQL`** to test your connection. and **`mySQLdump`** to dump and restore your data. For installation check [my guides](https://github.com/nnbaocuong99/Database/tree/main/MariaDB)
   - MongoDB: About the test connection there are so many options so you can decide it, `dump` and `restore` You need to download MongoDatabaseTools. For installation check [my guides](https://github.com/nnbaocuong99/Database/tree/main/MongoDB)
 
-#### `exec` into, create database and table
+#### 2. Generate data `exec` into, create database and table
+- There are tons of websites where we can create fake data to insert, import into our Databases. In this case, I'm gonna use [Mockaroo](https://www.mockaroo.com/).
+- Just fill it to generate your data then `Save as` `.CSV` or `.JSON`. Check to make sure that file have datas.
+
+#### 3. Work
 - 
 
 
