@@ -284,6 +284,8 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
 
   </details>
 
+- `Commit` and refresh 
+
 <br>
 
 ### Part 3: Work with Db, practices
