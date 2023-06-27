@@ -2,6 +2,11 @@
 
 ### 1. Forgot rancher password during
 
+<details>
+<summary><samp>&#9776;</samp> click to expand </summary>
+
+<br>
+
 Way to solve:
 
 - Step 1:
@@ -172,4 +177,7 @@ New password for default admin user (user-cxtwr):
 J-L1fXH0OwibH60HlcVv
 ```
 
+<br>
+
+</details>
 
