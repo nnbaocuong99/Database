@@ -1,5 +1,45 @@
 # Using MariaDB
+## `.yaml` template
+> Replace `x` with the version your desired
+### `Chart.yaml`
+```yaml
+dependencies:
+  - name: mariadb
+    version: x.x.x
+    repository: https://charts.bitnami.com/bitnami
+    condition: mariadb.enabled
+```
+### `values.yaml`
+```yaml
+mariadb:
+  enabled:
+    image:
+    debug:
+  nameOverride:
+  fullnameOverride:
+  architecture:
+   auth:
+    rootPassword:
+    password:
+  primary:
+    resources:
+       requests:
+         cpu:
+         memory:
+       limits:
+         cpu:
+         memory:
+    service:
+      type:
+      nodePort:
+    persistence:
+      enabled:
+      existingClaim:
+  volumePermissions:
+    enabled: true
+```
 
+<br>
 
 ## Tools / How to work with MariaDB
 
