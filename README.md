@@ -300,10 +300,26 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
 - Just fill it to generate your data then `Save as` `.CSV` or `.JSON`. Check to make sure that file have datas.
 
 #### 3. Work
-- 
+- After the Databases has been created. Now we need to create a Database in that, because in the previous step we just apply to got a Database on the cluster, its empty in there. Here is a few small simple steps you should follow in this step:
+  - Step 1: Exec into the Database note via Rancher
+  - Step 2: Create Database
+  - Step 3: Create Table, insert Data
 
+<br>
 
+- MariaDB:
+<details>
 
+content
+
+</details>
+
+- MongoDB:
+<details>
+
+content
+
+</details>
 
 
 
