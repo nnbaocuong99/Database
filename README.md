@@ -308,18 +308,18 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
 <br>
 
 - MariaDB:
-<details>
+  <details>
 
-content
+  content
 
-</details>
+  </details>
 
 - MongoDB:
-<details>
+  <details>
 
-content
+  content
 
-</details>
+  </details>
 
 
 
