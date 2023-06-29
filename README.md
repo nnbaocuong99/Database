@@ -309,8 +309,11 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
 
 - MariaDB:
   <details>
-
-  content
+    
+  - With MariaDB we can use Rancher. Select ``mariadb-node` and `execute shell` to start it
+    
+  ![image](https://github.com/nnbaocuong99/Database/assets/100349044/25a1428a-d487-4a87-9cef-ed49a9596f04)
+ 
 
   </details>
 
