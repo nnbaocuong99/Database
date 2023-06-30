@@ -72,7 +72,7 @@
 
 <br>
 
-## ❗️ Lets working on it
+## ❗️ Lets get into it
 
 ### ✏️Part 1: Create VM, Install Docker and create k8s cluster
 
