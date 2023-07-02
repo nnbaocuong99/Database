@@ -310,10 +310,21 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
 - MariaDB:
   <details>
     
-  - With MariaDB we can use Rancher. Select ``mariadb-node` and `execute shell` to start it
+  - With MariaDB we can use Rancher. Select `mariadb-node` and `execute shell` to start it
+   
     
   ![image](https://github.com/nnbaocuong99/Database/assets/100349044/25a1428a-d487-4a87-9cef-ed49a9596f04)
- 
+
+
+  - Once we get into it. run this command with <ins>user `root` and the following password in your `.yaml` file. (it will ask for password after you run the command)
+  ```mysql
+  mysql -u root -p
+  ```
+
+
+  ![image](https://github.com/nnbaocuong99/Database/assets/100349044/0d25fc25-cad8-4b81-9e41-744105a59cb4)
+
+
 
   </details>
 
