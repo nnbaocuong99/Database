@@ -309,22 +309,38 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
 
 - MariaDB:
   <details>
-    
-  - With MariaDB we can use Rancher. Select `mariadb-node` and `execute shell` to start it
+  
+  - You can use **`Mysql Workbench`** to test the connection and work with it (Create DB, table,...), if you're following my method fill it like in the form below:
+
+  ![image](https://github.com/nnbaocuong99/Database/assets/100349044/08f9cfb8-3c2f-4c6a-8d65-48d6523e658c)
+
+  - or nevgative to MariaDB using Rancher. Select `mariadb-node` and `execute shell` to start it
    
     
   ![image](https://github.com/nnbaocuong99/Database/assets/100349044/25a1428a-d487-4a87-9cef-ed49a9596f04)
 
 
-  - Once we get into it. run this command with <ins>user `root` and the following password in your `.yaml` file. (it will ask for password after you run the command)
+  - Once we get into it. run this command with user: **`root`** and the following password in your `.yaml` file, in this case `root-password` in my `.yaml` is: `44Xb7YDFgKHgp7kYLXzb` (it will ask for password after you run the command)
   ```mysql
   mysql -u root -p
   ```
 
-
   ![image](https://github.com/nnbaocuong99/Database/assets/100349044/0d25fc25-cad8-4b81-9e41-744105a59cb4)
 
+  - You can create database by run the following commnad below or use **`Mysql Workbench`**
+  ```ruby
+  create database example_name
+  ```
+  > the result gonna be: **`Query OK, 1 row affected (0.02 sec)`**
 
+  - Use it:
+  ```bash
+  #show all the database in it
+  show databases;
+
+  #use the database you want
+  use database_name;
+  ``` 
 
   </details>
 
