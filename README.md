@@ -68,7 +68,14 @@
   - [x] Create Database. table.
   - [x] Genarate data.
   - [x] Insert / Import data into Database.
-  - [ ] Practice: `backup`, `drop` table and then `restore.
+  - [x] Practice: `backup`, `drop` table and then `restore.
+
+- VPS
+  - [ ] Create Databases on VPS
+    - [ ] MariaDB
+    - [ ] MongoDB 
+  - [ ] Insert Data
+  - [ ] Dump, Restore data.
 
 <br>
 
