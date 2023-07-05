@@ -358,7 +358,7 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
 
   </details>
 
-
+### ✏️Part x: Install Databases on VPS
 
 
 
