@@ -71,11 +71,11 @@
   - [x] Practice: `backup`, `drop` table and then `restore.
 
 - VPS
-  - [ ] Create Databases on VPS
-    - [ ] MariaDB
-    - [ ] MongoDB 
-  - [ ] Insert Data
-  - [ ] Dump, Restore data.
+  - [x] Create Databases on VPS
+    - [x] MariaDB
+    - [x] MongoDB 
+  - [x] Insert Data
+  - [x] Dump, Restore data.
 
 <br>
 
@@ -312,8 +312,6 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
   - Step 2: Create Database
   - Step 3: Create Table, insert Data
 
-<br>
-
 - MariaDB:
   <details>
   
@@ -332,42 +330,229 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
   mysql -u root -p
   ```
 
-  ![image](https://github.com/nnbaocuong99/Database/assets/100349044/0d25fc25-cad8-4b81-9e41-744105a59cb4)
-
   - You can create database by run the following commnad below or use **`Mysql Workbench`**
   ```ruby
   create database example_name
   ```
   > the result gonna be: **`Query OK, 1 row affected (0.02 sec)`**
 
-  - Use it:
+  - Use these command below to use and work with the database u just created:
   ```bash
   #show all the database in it
   show databases;
 
   #use the database you want
   use database_name;
+
+  #create a table (in this case, I've created a table with 5 columns and inserted values through each line).
+  create table employee_list_2 (employee_id INT, firstname VARCHAR(16), lastname VARCHAR(16), jobtitle VARCHAR(16), salary VARCHAR(16));
+
+  #insert data into the table
+  INSERT INTO employee_list_2 (employee_id, firstname, lastname, jobtitle, salary) VALUES ('1', 'Sigrid', 'Bowkett', 'Librarian', '51907');
   ``` 
+
+  - Move on the next step. Dump / backup and restore data into the db (the commands i've been using)
+  ```mysql
+  #dump
+  mysqldump -u admin -p test > backup.sql
+
+  #restore
+  mysql -u admin -p test < backup.sql
+  ```
+
+  ![image](https://github.com/nnbaocuong99/Database/assets/100349044/0d25fc25-cad8-4b81-9e41-744105a59cb4)
+
+  - Result:
+    
+  ![image](https://github.com/nnbaocuong99/Database/assets/100349044/94a7eb54-4469-40dc-bc69-51aaa2a6bbd8)
+
 
   </details>
 
 - MongoDB:
   <details>
 
-  content
+  Content for the MongoDb currently not available rn because of some errors and i still need to fix that. I'll update this part asap
+  
+  </details>
+
+<br>
+
+### ✏️Part 4: Install Databases on VPS
+
+#### 1.Prepare a VM <sup>In this case im gonna use the same script but with the `focal 20.04` version</sup>
+###### Scripts
+
+<details>
+
+```ruby
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/focal64"
+
+  config.vm.define "master" do |master|
+    config.vm.network "private_network", ip: "192.168.56.203"
+    master.vm.hostname = "db-vps-20.04"
+    master.vm.provider "virtualbox" do |vb|
+        vb.name = "db-vps-20.04"
+        vb.memory = 3096
+        vb.cpus = 3
+    end
+  end
+
+  # Chạy các lệnh shell
+  config.vm.provision "shell", inline: <<-SHELL
+    # Đặt pass 123 có tài khoản root và cho phép SSH
+    useradd cuongnnb
+    usermod -aG sudo cuongnnb
+    #usermod -aG docker cuongnnb
+    echo "cuongnnb:123" | sudo chpasswd
+    sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+    systemctl reload sshd
+    # Ghi nội dung sau ra file /etc/hosts để truy cập được các máy theo HOSTNAME
+    echo "192.168.56.200 master-ubuntu-20.04" >> /etc/hosts
+    echo "192.168.56.201 worker-node1-ubuntu-20.04" >> /etc/hosts
+
+    #cài đặt docker và kubernetes
+    sudo apt-get update
+    sudo apt-get upgrade -y
+    sudo apt install docker.io -y
+    usermod -aG docker cuongnnb
+  SHELL
+end
+```
+
+</details>
+
+#### 2. Install MongoDB, MariaDB
+
+- MongoDB:
+
+  I ran the following command, and MariaDB was successfully installed.
+  - Update the package list for upgrades and new package installations:
+  ```ruby
+  sudo apt update
+  ```
+  - Install MongoDB:
+  ```ruby
+  sudo apt install mongodb
+  ```
+  - *Optional* | MongoDB will start automatically. However, you can verify its status:
+  ```ruby
+  sudo systemctl status mongodb
+  ```
+  - With default configuration, MongoDB listens on the localhost interface. To access it from external machines, you may need to modify the MongoDB configuration. 
+  ```ruby
+  sudo nano /etc/mongodb.conf
+  ```
+  > Inside the configuration file, look for the bind_ip directive and change its value to the IP address you want MongoDB to listen on. If you want MongoDB to listen on all available IP addresses, set it to `0.0.0.0`
+
+  - Save the changes and restart MongoDB to apply the configuration changes:
+   ```ruby
+   sudo systemctl restart mongodb
+   ```
+
+
+- MariaDB:
+
+  Same things with Mongo, MariaDB was successfully installed. Here are the commands:
+
+  - Update the package list for upgrades and new package installations:
+  ```ruby
+  sudo apt update
+  ```
+
+  - Install MariaDB by running the following command:
+  ```ruby
+  sudo apt install mariadb-server
+  ```
+
+  > **Warning** During the installation, you will be prompted to set a root password for MariaDB. Enter a secure password and remember it, as you will need it later.
+
+  - After the installation is complete, MariaDB should be start automatically. However, you can verify its status:
+  ```ruby
+  sudo systemctl status mariadb
+  ```
+
+  - Secure your MariaDB installation by running the following command:
+  ```ruby
+  sudo mysql_secure_installation
+  ```
+
+  > This command will guide you through a series of prompts to configure some security settings. It's recommended to answer "Y" to all the prompts, including removing anonymous users, disallowing remote root login, removing test databases, and reloading privilege tables.
+
+  - Access:
+  ```ruby
+  sudo mysql -u root -p
+  ```
+
+#### 3. Work with MongoDB, MariaDB
+
+- MongoDB
+
+  <details>
+
+  - After the installations, starting by run the command:
+  ```
+  mongo
+  ```
+  
+  - Run the commands to show the databases you're having
+  ```
+  show dbs
+  ```
+  
+  - Run the command to use or create a db if you havent created one
+  ```
+  use db_name | in this case im using "use test_mongo"
+  ```
+  
+    ![image](https://github.com/nnbaocuong99/Database/assets/100349044/c37f0024-8214-401b-9642-d193ca8ade31)  
+
+  - Insert data into it by runny the follwing syntax
+  ```
+  db.items.insertOne({document})
+  db.items.insertMany([{document 1}, {document 2}])
+  ```
+
+  - In this case im gonna insert a name list have 3 people and ID, age with 2 methods `insertOne` & `insertMany`
+  - Result will be:
+
+    ![image](https://github.com/nnbaocuong99/Database/assets/100349044/fece2e2d-f9d5-4df9-9bb5-3ebc917c6eee)
+
+  - Dump and restore data
+    - Here are the dump and restore command and the result:
+    ```
+    #dump, backup
+    mongodump -d test_mongo -o /backup
+
+    #restore
+    mongorestore --db test_mongo /backup/test_mongo
+    ```
+    
+    ![image](https://github.com/nnbaocuong99/Database/assets/100349044/7e591878-56cf-4edd-a6d4-6f99be044ee8)
+ 
+  - Explain:
+    - I created a directory, folder name `backup` by running `mkdir backup`
+    - Then I ran the dump command up there to backup data and it will automatically create a folder name `test_mongo` included 2 files: `items.bson` and `items.metadata.json`
+    - Type `mongo` again and drop the `table` in the `test_mongo` to remove the data
+      
+    ![image](https://github.com/nnbaocuong99/Database/assets/100349044/02ac1b52-a17d-445f-a985-3212c01ddfeb)
+
+    - Then use the backup command to restore data into the `test_mongo` again. here is the results:
+      
+    ![image](https://github.com/nnbaocuong99/Database/assets/100349044/f1e3659f-cca2-491c-8ff5-3ce2bde9ddc6)
 
   </details>
 
-### ✏️Part x: Install Databases on VPS
-
-
-
-
-
-
-
-
-
+- MariaDB
 
 
 
