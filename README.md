@@ -554,10 +554,56 @@ end
 
 - MariaDB
 
+  <details>
+  
+  - First you need to create one user with full permission although maria request to create a password during the installations. Check [this](https://www.hostinger.com/tutorials/mysql/how-create-mysql-user-and-grant-permissions-command-line) and following exactly same steps.
+  - Then start with this command. In this case I created an account and grant privileges for an account name `admin`
+  ```mysql
+  mysql -u admin -p
+  ```
+  - Once you're logged in. Start with those command below to show databases
+  ```mysql
+  show databases;
+  ```
 
+  - To create your own databases (if you dont have 1)
+  ```mysql
+  create database example_name;
+  ```
 
+  - to create table with the title of the columns and the quantity of them (how many, what kind of data,...etc). In this case my template just for and list with ID, first, last name, job and salary. For more about datatype for exmaple `varchar(16)` check [this](https://www.w3schools.com/mysql/mysql_datatypes.asp)
+  ```
+  create table employee_list_2 (employee_id INT, firstname VARCHAR(16), lastname VARCHAR(16), jobtitle VARCHAR(16), salary VARCHAR(16));
+  ```
+  - Once your got this. Imagine it might be a table with 5 columns like this and now you have to `insert` data into it thru each row
+  
+  | ID | First Name | Last Name | Job title | Salary |
+  |----|------------|-----------|-----------|--------|
 
+  - Following these steps. im using this command to insert data and values:
+  ```
+  NSERT INTO employee_list_2 (employee_id, firstname, lastname, jobtitle, salary) VALUES ('1', 'Sigrid', 'Bowkett', 'Librarian', '51907');
+  ```
 
+  - Once you're done. Roll back by type `exit`. With me im gonna create a backup folder name `backup` cd into it and run the backup commnad and cat these file to make sure that my data was succesfully dumped. 
+  ```
+  mysqldump -u admin -p test > backup.sql
+  ```
+
+  ![image](https://github.com/nnbaocuong99/Database/assets/100349044/a7ed32fe-9496-4627-874f-7e9b23be0d78)
+
+  - And the you can get into your db and run the same command up there to drop your table. remove your data and start to practice the backup
+  
+  ![image](https://github.com/nnbaocuong99/Database/assets/100349044/9bf8e545-dcbc-4bfe-b382-c30a44c3ec64)
+
+  - Ok. Now you're done. run this command to backup your data into your db again
+  ```
+  mysql -u admin -p test < backup.sql
+  ```
+  
+  ![image](https://github.com/nnbaocuong99/Database/assets/100349044/aadaee76-1248-4fdf-b993-da8baf4bd50c)
+
+  </details>
 
 
 
