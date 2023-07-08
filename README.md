@@ -605,6 +605,13 @@ end
 
   </details>
 
+<br>
+
+---
+
+<br>
+
+<p align='center'> Congrats! you're doing great. Thanks for reading until this and good luck with your journey. </br> ✨ Best wishes, 𝓃𝓃𝒷𝒸, </p>	
 
 
 
