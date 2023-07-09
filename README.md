@@ -372,7 +372,7 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
 - MongoDB:
   <details>
 
-  Content for the MongoDb currently not available rn because of some errors and i still need to fix that. I'll update this part asap
+  (Coming soon) Content for the MongoDb currently not available rn because of some errors and i still need to fix that. I'll update this part asap
   
   </details>
 
