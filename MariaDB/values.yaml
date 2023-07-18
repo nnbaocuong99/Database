@@ -1,0 +1,26 @@
+mariadb:
+  enabled:
+    image:
+    debug:
+  nameOverride:
+  fullnameOverride:
+  architecture:
+   auth:
+    rootPassword:
+    password:
+  primary:
+    resources:
+       requests:
+         cpu:
+         memory:
+       limits:
+         cpu:
+         memory:
+    service:
+      type:
+      nodePort:
+    persistence:
+      enabled:
+      existingClaim:
+  volumePermissions:
+    enabled: true
