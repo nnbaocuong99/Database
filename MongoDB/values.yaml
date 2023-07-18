@@ -1,0 +1,21 @@
+mongodb:
+    enabled: true
+    nameOverride:
+    fullnameOverride:
+    architecture:
+    auth:
+      rootUser:
+      rootPassword:
+    nodeSelector:
+      kubernetes.io/hostname:
+    tolerations:
+      - key:
+        operator:
+        value:
+        effect:
+    service:
+      type:
+      nodePort:
+    persistence:
+      enabled:
+      existingClaim:
