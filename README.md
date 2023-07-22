@@ -5,7 +5,7 @@
 ## ❗️ Introducing
 
 ### ***1. Sumary:***
-- **About**
+- **About the project:**
   - **Main topic:** This project will show how to *create, deploy, backup and restore data* on Database (MongoDb and MariaDB in this case) this is not the end and I'm still working on it. This is also my report and 100% on-prem.
   - VM script by [@TruongLM](https://github.com/lmt2407)
   - For more infor (`script`, `how to setup`, `run` and `work` with k8s, `tags`,...) check [this repo](https://github.com/nnbaocuong99/k8s)
@@ -35,47 +35,40 @@
 <br>
 
 ###  ***2. Todo list / Workflow to follow (update weekly):***
-- Setup VM:
+1. Setup VM:
   - [x] Create `master`
   - [X] Create `worker` node
 
-- Create k8s cluster:
+2. Create k8s cluster:
   - [x] Create k8s cluster ([guides here](https://github.com/nnbaocuong99/k8s#--install-rancher--setup-k8s-cluster))
   - [x] Install kubectl and helm.
 
-- Setup ArgoCD:
+3. Setup ArgoCD:
   - [x] Change type to `Load Balancer`
   - [x] Change the `port-forward` svc to ~~`node-port`~~ (connect using `wokernode-port`)
 
-- ~~Setup CI:~~
-  - [ ] ~~Add `Variables`~~
-  - [ ] ~~Register `GitLab Runner`~~
-
-- Setup CD:
+4. Setup CD:
   - [x] Connect repo (Recommend Gitlab)
   - [x] Create `Chart.yaml` and `values.yaml` / Update the configurations
     - [x] Old project: Find a way to update `.yaml` file for ArgoCD to read and create the DB
     - [x] New project: Create a new chart file with the default config of the `MongoDb` and `MaridaDB`
 
-- Create Database both `MongoDb` and `MariaDB`:
+5. **On K8s** Create Database both `MongoDb` and `MariaDB`:
   - [x] `Add dependencies`
   - [x] Config the `values.yaml`
   - [x] Apply and deploy the Databases on k8s
- 
 
-- Pratices / Dump data
+6. VPS
+  - [x] Install Databases on VPS
+    - [ ] Customize
+    - [ ] Hardening 
+
+7. Pratices / Dump data
   - [x] Download tool, test connection.
   - [x] Create Database. table.
   - [x] Genarate data.
   - [x] Insert / Import data into Database.
   - [x] Practice: `backup`, `drop` table and then `restore.
-
-- VPS
-  - [x] Create Databases on VPS
-    - [x] MariaDB
-    - [x] MongoDB 
-  - [x] Insert Data
-  - [x] Dump, Restore data.
 
 <br>
 
