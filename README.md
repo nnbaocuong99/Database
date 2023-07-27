@@ -35,40 +35,18 @@
 <br>
 
 ###  ***2. Todo list / Workflow to follow (update weekly):***
-1. Setup VM:
-  - [x] Create `master`
-  - [X] Create `worker` node
-
-2. Create k8s cluster:
-  - [x] Create k8s cluster ([guides here](https://github.com/nnbaocuong99/k8s#--install-rancher--setup-k8s-cluster))
-  - [x] Install kubectl and helm.
-
-3. Setup ArgoCD:
-  - [x] Change type to `Load Balancer`
-  - [x] Change the `port-forward` svc to ~~`node-port`~~ (connect using `wokernode-port`)
-
-4. Setup CD:
-  - [x] Connect repo (Recommend Gitlab)
-  - [x] Create `Chart.yaml` and `values.yaml` / Update the configurations
-    - [x] Old project: Find a way to update `.yaml` file for ArgoCD to read and create the DB
-    - [x] New project: Create a new chart file with the default config of the `MongoDb` and `MaridaDB`
-
-5. **On K8s** Create Database both `MongoDb` and `MariaDB`:
-  - [x] `Add dependencies`
-  - [x] Config the `values.yaml`
-  - [x] Apply and deploy the Databases on k8s
-
-6. VPS
-  - [x] Install Databases on VPS
-    - [ ] Customize
-    - [ ] Hardening 
-
-7. Pratices / Dump data
-  - [x] Download tool, test connection.
-  - [x] Create Database. table.
-  - [x] Genarate data.
-  - [x] Insert / Import data into Database.
-  - [x] Practice: `backup`, `drop` table and then `restore.
+- [x] Setup VM:
+- [x] Create k8s cluster:
+- [x] Setup ArgoCD:
+- [x] Setup CD:
+- [x] Deloy Database on k8s:
+  - [ ] ~~Mongodb~~
+  - [x] Mariadb
+- [x] Pratices / Dump data
+- [x] Deploy Database on VPS:
+  - [x] Mongodb
+  - [x] Mariadb
+- [ ] Covert, install Replicaset, Masterslave
 
 <br>
 
