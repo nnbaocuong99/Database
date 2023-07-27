@@ -182,3 +182,11 @@ J-L1fXH0OwibH60HlcVv
 </details>
 
 ### 1. failed to created pod sandbox
+
+### 3. mongod.service: Main process exited, code=dumped, status=4/IL
+```ruby
+sudo apt remove mongodb mongo-tools mongodb-clients mongodb-server mongodb-server-core
+sudo apt autoremove
+sudo rm -rf /var/lib/mongodb/
+sudo apt install mongodb
+```
