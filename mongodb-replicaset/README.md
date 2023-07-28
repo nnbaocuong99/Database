@@ -1,5 +1,12 @@
 # Setup mongodb Replicaset
 
+### labs setup
+| ID | Role      | Hostname | IP             | port |
+|----|-----------|--------- |----------------|------|
+| 0  | primary   | db1      | 192.168.56.210 |
+| 1  | secondary | db2      | 192.168.56.211 |
+| 2  | secondary | db3      | 192.168.56.212 |
+
 ### 1. Setup VM 
 - Use [this]() script to setup at least 3 VM
 - Use `vagrant up` to creat a VM and install mongodb on each node (requirements 2 CPU, 4GB RAM)
@@ -46,3 +53,18 @@ Check the status of the MongoDB service to ensure it is running:
 ```ruby
 $ sudo systemctl status mongod
 ```
+
+<br>
+
+### 3. Setup multi-instances
+- Create directories:
+  ```
+  mkdir -p storage/data/db1
+  mkdir -p storage/data/db2
+  mkdir -p storage/data/db3
+  ```
+
+- Start mongdod instance:
+  ```
+  mongod --port 27017 --dbpath storage/data/db1 --replSet mrs
+  ```
