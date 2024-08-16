@@ -1,4 +1,4 @@
-###### <div align="center"> © Spagbo 8 Aug, 2022 // 2022-2024 </div>
+###### <div align="center"> © Spagbo 26 May, 2023 // 2022-2024 </div>
 
 <br>
 
@@ -6,8 +6,9 @@
 
 ### ✨<ins>***1. Credit & Usage // Sumary***</ins>:
 ***About the project:***
-  - This project will show basically how to Install MongoDB & MariaDB using `Helm chart` and `ArgoCD`. Also *deploy, backup and restore data* on it. 100% on-prem!
-  - Make sure you followed all these step on [this repo](https://github.com/nnbaocuong99/k8s) before you continue on this.
+  - This project will show basically how to Install MongoDB & MariaDB using `Helm chart` and `ArgoCD`. Also *deploy, backup and restore data* on it.
+  - Make sure you followed all these step on [this repo](https://github.com/nnbaocuong99/k8s) first before you continue because its 100% on-prem!
+  - Included both Deploy on K8s and VPS.
 
 ***Credit***
 - This project is written by me and wouldn't be possible without the hard work and contributions of the following individuals:
@@ -18,17 +19,18 @@
 <br>
 
 ### ✨<ins>***2. Todo list, Table of contents***</ins>:
-- [x] Setup VM:
-- [x] Create k8s cluster:
-- [x] Setup ArgoCD:
-- [x] Setup CD:
+***On K8s***
 - [x] Deloy Database on k8s:
-  - [ ] ~~Mongodb~~
-  - [x] Mariadb
+- [ ] ~~Mongodb~~
+- [x] Mariadb
 - [x] Pratices / Dump data
+
+***On VPS***
 - [x] Deploy Database on VPS:
-  - [x] Mongodb
-  - [x] Mariadb
+- [x] Mongodb
+- [x] Mariadb
+
+***Advanced, Optional***
 - [ ] Covert, install Replicaset, Masterslave
 
 ---
