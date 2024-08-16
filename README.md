@@ -1,40 +1,23 @@
-# How to create MongoDB & Maria DB with `Helm chart` and `ArgoCD`
+###### <div align="center"> © Spagbo 8 Aug, 2022 // 2022-2024 </div>
 
 <br>
 
-## ❗️ Introducing
+# ❗️ Introducing
 
-### ***1. Sumary:***
-- **About the project:**
-  - **Main topic:** This project will show how to *create, deploy, backup and restore data* on Database (MongoDb and MariaDB in this case) this is not the end and I'm still working on it. This is also my report and 100% on-prem.
-  - VM script by [@TruongLM](https://github.com/lmt2407)
-  - For more infor (`script`, `how to setup`, `run` and `work` with k8s, `tags`,...) check [this repo](https://github.com/nnbaocuong99/k8s)
+### ✨<ins>***1. Credit & Usage // Sumary***</ins>:
+***About the project:***
+  - This project will show basically how to Install MongoDB & MariaDB using `Helm chart` and `ArgoCD`. Also *deploy, backup and restore data* on it. 100% on-prem!
+  - Make sure you followed all these step on [this repo](https://github.com/nnbaocuong99/k8s) before you continue on this.
 
-- **Tools:**
-  <details>
-
-   - [Kubernetes](https://kubernetes.io)
-   - [Rancher](https://rancher.com/docs/)
-   - [Apache](https://maven.apache.org)
-   - [Docker](https://www.docker.com)
-   - [Helm](https://helm.sh)
-   - [ArgoCD](https://argo-cd.readthedocs.io/en/stable/)
-   - [Vmbox](https://www.virtualbox.org)
-
-  </details>
-
-- **Project / Roadmap:**
-  <details>
-
-   - [Roadmap](https://github.com/nnbaocuong99/Database/projects)
-   - [Project](https://github.com/users/nnbaocuong99/projects/2)
-   - [Issues](https://github.com/nnbaocuong99/Database/issues)
-     
-  </details>
+***Credit***
+- This project is written by me and wouldn't be possible without the hard work and contributions of the following individuals:
+- For ***<mark><ins>Learning-purposes Only***</mark></ins>, meant for educational and non-commercial use. Feel free to study, learn from it.
+- Has ***<mark><ins>No Unauthorized Copying***</mark></ins>. Please refrain from directly copying or using it for any commercial or production purposes without proper authorization.
+- If you find this project helpful, consider giving credit by linking back to this repository. Mentioning it in your own project's documentation or `README` is appreciated.
 
 <br>
 
-###  ***2. Todo list / Workflow to follow (update weekly):***
+### ✨<ins>***2. Todo list, Table of contents***</ins>:
 - [x] Setup VM:
 - [x] Create k8s cluster:
 - [x] Setup ArgoCD:
@@ -48,9 +31,11 @@
   - [x] Mariadb
 - [ ] Covert, install Replicaset, Masterslave
 
+---
+
 <br>
 
-## ❗️ Lets get into it
+# ❗️ Guides
 
 ### ✏️Part 1: Create VM, Install Docker and create k8s cluster
 
