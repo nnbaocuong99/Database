@@ -6,12 +6,11 @@
 
 ### ✨<ins>***1. Credit & Usage // Sumary***</ins>:
 ***About the project:***
-  - This project will show basically how to Install MongoDB & MariaDB using `Helm chart` and `ArgoCD`. Also *deploy, backup and restore data* on it.
-  - Make sure you followed all these step on [this repo](https://github.com/nnbaocuong99/k8s) first before you continue because its 100% on-prem!
-  - Included both Deploy on K8s and VPS.
+- This project will show you 100% on-prem, basically how to Install MongoDB & MariaDB using `Helm chart` and `ArgoCD`. Also *deploy, backup and restore data* on it.
+- This project is exactly the second part of the K8s one and includes work on both Kubernetes (K8s) and VPS.
 
 ***Credit***
-- This project is written by me and wouldn't be possible without the hard work and contributions of the following individuals:
+- This project is written by me and wouldn't be possible without the hard work and contributions of the following individuals: [@QuocNVC](https://github.com/quoc9x) - Bug fixes and enhancements, [@TruongLM](https://github.com/lmt2407) - VM script writer.
 - For ***<mark><ins>Learning-purposes Only***</mark></ins>, meant for educational and non-commercial use. Feel free to study, learn from it.
 - Has ***<mark><ins>No Unauthorized Copying***</mark></ins>. Please refrain from directly copying or using it for any commercial or production purposes without proper authorization.
 - If you find this project helpful, consider giving credit by linking back to this repository. Mentioning it in your own project's documentation or `README` is appreciated.
@@ -38,238 +37,130 @@
 <br>
 
 # ❗️ Guides
+### ✨ Setup
+- Firstly! as I mentioned, this project is a continuation of k8s project. Therefore, you should consider using the existing VM from it or starting with an entirely new VM. However, I HIGHLY RECOMMEND the first option because we’ll need to deploy the database on Kubernetes after this.
+- Secondly, let’s clarify everything once more. I’ll only focus on aspects related to the DB in this project. All <ins>*setup steps*</ins> and <ins>*VM scripts*</ins> must be within the [K8s](https://github.com/nnbaocuong99/k8s) project. Feel free to review it thoroughly to ensure 100% accuracy before you begin.
+- What we need to do in setup steps (requirements)
+  - *2 VMs for Master, Worker node.*
+  - *K8s cluster.*
+  - *CI/CD system already in operation. (skip this step if you followed since K8s).*
 
-### ✏️Part 1: Create VM, Install Docker and create k8s cluster
-
-#### 1. Setup VM
-- Based on my old project In this repo [How to install k8s and CI/CD](https://github.com/nnbaocuong99/k8s) we gonna use the same script to create 2 VM `master` and `worker` node
-- [this](https://github.com/nnbaocuong99/Database/blob/main/VM%20Scripts/README.md)
-
-#### 2. Install Rancher and create k8s cluster
-- Follow [these steps](https://github.com/nnbaocuong99/k8s#-setup)
+> [!caution]
+> - *Please skip the entire setup steps if you’ve already succeeded with them in a previous Kubernetes project. The setup steps are intended for those who are starting a brand new project.*
+> - *This is just a template, you need to modify these script ALL by yourself, even the DB config.*
+> - *Highly recommend `Nodeport` in this case.*
 
 <br>
 
-### ✏️Part 2: Setup ArgoCD / CI/CD / Create Database
-#### 1. Setup ArgoCD
-- Follow [these steps](https://github.com/nnbaocuong99/k8s#-setup-argocd-) to setup ArgoCD / if your're started a brand new project check my [old project](https://github.com/nnbaocuong99/k8s)
+### ✨ Install and work with Database <ins>on K8s</ins>
+#### <ins>1:</ins>
+- Install and setup ArgocD, create Namespace by follow [these steps](https://github.com/nnbaocuong99/k8s#2-1).
 - Change it to `LoadBalancer`
-```ruby
-kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
-```
-
-#### 2. Setup CI/CD:
-- Setup `CI` check [this](https://github.com/nnbaocuong99/k8s#-ci)
-- Setup `CD`
-  - Get into your ArgoCD, `Settings` -> `Add Repository` and add your repo and `helm` repo to update the config for helm
-  - Fill them form like the 1st picture and and you will see the exactly the same with the 2nd picture
-    > Repo link to copy: `https://charts.bitnami.com/bitnami`
-    <img src="https://github.com/nnbaocuong99/Database/assets/100349044/2d716984-5e90-4d2c-b395-70749bcf406c" alt="uvu" width="800">
-    <img src="https://github.com/nnbaocuong99/Database/assets/100349044/490dd351-51e4-4ad7-a3b6-b92749f43cab" alt="uvu" width="800">
-- Create an application if you didn't. for more check [this](https://github.com/nnbaocuong99/k8s#%EF%B8%8F-step-7)
-
-#### 3. Create Database
-- Update the `Chart.yaml` and `values.yaml` 
-  - If you're started a brand new project check these: [MariaDB](https://artifacthub.io/packages/helm/bitnami/mariadb) and [MongoDB](https://artifacthub.io/packages/helm/bitnami/mongodb) chart
-  - If you're following the way to update from the old one, copy 2 `.yaml` file below 
-
-- my raw `Chart.yaml` config file to copy
-
-  <details>
-
   ```yaml
-  apiVersion: v2
-  name: demo-app
-  description: A Helm chart for Kubernetes
-
-  # A chart can be either an 'application' or a 'library' chart.
-  #
-  # Application charts are a collection of templates that can be packaged into versioned archives
-  # to be deployed.
-  #
-  # Library charts provide useful utilities or functions for the chart developer. They're included as
-  # a dependency of application charts to inject those utilities and functions into the rendering
-  # pipeline. Library charts do not define any templates and therefore cannot be deployed.
-  type: application
-
-  # This is the chart version. This version number should be incremented each time you make changes
-  # to the chart and its templates, including the app version.
-  # Versions are expected to follow Semantic Versioning (https://semver.org/)
-  version: 0.1.0
-
-  # This is the version number of the application being deployed. This version number should be
-  # incremented each time you make changes to the application. Versions are not expected to
-  # follow Semantic Versioning. They should reflect the version the application is using.
-  # It is recommended to use it with quotes.
-  appVersion: "1.16.0"
-
-  dependencies:
-    - name: mariadb
-      version: 11.0.11
-      repository: https://charts.bitnami.com/bitnami
-      condition: mariadb.enabled
-    - name: mongodb
-      version: 12.1.16
-      repository: https://charts.bitnami.com/bitnami
-      condition: mongodb.enabled
+  kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
   ```
 
-  </details>
+#### <ins>2:</ins>
+- Skip this step if your CI/CD is still in operation or setup if you don’t have one. For more information, check [this](https://github.com/nnbaocuong99/k8s#2-ci).
+- Login into ArgoCD, `Settings`/`Add Repository`. Add your repo and `helm` to update the config for it. Dont forget to create an application if you didn't
+- Fill the form like the 1st picture and and you will see the exactly the same with the 2nd picture
+  <div align="center">
+      <img src="https://github.com/nnbaocuong99/Database/assets/100349044/2d716984-5e90-4d2c-b395-70749bcf406c" alt="uvu" width="900"> </br> <sup>Pic. 1</sup>
+      <br>
+      <br>
+  </div>
+  <div align="center">
+      <img src="https://github.com/nnbaocuong99/Database/assets/100349044/490dd351-51e4-4ad7-a3b6-b92749f43cab" alt="uvu" width="900"> </br> <sup>Pic. 2</sup>
+      <br>
+      <br>
+  </div>
 
-- my raw `values.yaml` config file to copy
-
-  <details>
-
-  ```yaml
-  # Default values for demo-app.
-  # This is a YAML-formatted file.
-  # Declare variables to be passed into your templates.
-
-  replicaCount: 1
-
-  image:
-    repository: nnbaocuong99/demo-gitlabci
-    pullPolicy: Always
-    # Overrides the image tag whose default is the chart appVersion.
-    tag: "1.0"
-
-  imagePullSecrets: []
-  nameOverride: ""
-  fullnameOverride: ""
-
-  serviceAccount:
-    # Specifies whether a service account should be created
-    create: true
-    # Annotations to add to the service account
-    annotations: {}
-    # The name of the service account to use.
-    # If not set and create is true, a name is generated using the fullname template
-    name: ""
-
-  podAnnotations: {}
-
-  podSecurityContext: {}
-    # fsGroup: 2000
-
-  securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
-
-  service:
-    type: NodePort
-    port: 80
-
-  ingress:
-    enabled: false
-    className: ""
-    annotations: {}
-      # kubernetes.io/ingress.class: nginx
-      # kubernetes.io/tls-acme: "true"
-    hosts:
-      - host: chart-example.local
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
-    tls: []
-    #  - secretName: chart-example-tls
-    #    hosts:
-    #      - chart-example.local
-
-  resources:
-    # We usually recommend not to specify default resources and to leave this as a conscious
-    # choice for the user. This also increases chances charts run on environments with little
-    # resources, such as Minikube. If you do want to specify resources, uncomment the following
-    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-    limits:
-      cpu: 100m
-      memory: 128Mi
-    requests:
-      cpu: 100m
-      memory: 128Mi
-
-  autoscaling:
-    enabled: false
-    minReplicas: 1
-    maxReplicas: 100
-    targetCPUUtilizationPercentage: 80
-    # targetMemoryUtilizationPercentage: 80
-
-  nodeSelector: {}
-
-  tolerations: []
-
-  affinity: {}
-
-  mongodb:
-    enabled: true
-    nameOverride: "mongodb"
-    fullnameOverride: "mongodb"
-    architecture: "standalone"
-    auth:
-      rootUser: "admin"
-      rootPassword: "erdG8qxerVfMPxTd8VHs"
-    service:
-      type: NodePort
-      nodePort: 32368
-    persistence:
-      enabled: false
-      #existingClaim: "pvc-my-nextpay-tech-mongodb"
-
-  mariadb:
-    enabled: true
-      image:
-      debug: true
-    nameOverride: "mariadb"
-    fullnameOverride: "mariadb"
-    architecture: "standalone"
-     auth:
-      rootPassword: "44Xb7YDFgKHgp7kYLXzb"
-      password: "rL43Ydk8DmYUKYmurML3"
-    primary:
-      resources:
-        # requests:
-        #   cpu: "1000m"
-        #   memory: "1536Mi"
-        # limits:
-        #   cpu: "1000m"
-        #   memory: "1536Mi"
+#### <ins>3:</ins>
+- In short, this step involves modifying your `.yaml` files in your repository by adding some configuration for your DB.
+- If you’ve started a brand new project, you should check these `Helm packages` by Bitnami for [MariaDB](https://artifacthub.io/packages/helm/bitnami/mariadb) & [MongoDB](https://artifacthub.io/packages/helm/bitnami/mongodb) to get more information and read them in detail.
+- Or update your `Chart.yaml` and `values.yaml` files by adding this and config them as yours
+  - `Chart.yaml`
+    ```yaml
+    dependencies:
+      - name: mariadb
+        version: 11.0.11
+        repository: https://charts.bitnami.com/bitnami
+        condition: mariadb.enabled
+      - name: mongodb
+        version: 12.1.16
+        repository: https://charts.bitnami.com/bitnami
+        condition: mongodb.enabled
+    ```
+  - `values.yaml`
+    ```yaml
+    mongodb:
+      enabled: true
+      nameOverride: "mongodb"
+      fullnameOverride: "mongodb"
+      architecture: "standalone"
+      auth:
+        rootUser: "YOUR_ROOT_USER"
+        rootPassword: "YOUR_ROOTPASSWORD"
       service:
-        type: NodePort
-        nodePort: 32268
+        type: NodePort or PortForward
+        nodePort: YOUR_PORT
       persistence:
         enabled: false
-        #existingClaim: "pvc-my-nextpay-tech-mariadb"
-    volumePermissions:
+        #existingClaim:
+
+    mariadb:
       enabled: true
-  ```
+        image:
+        debug: true
+      nameOverride: "mariadb"
+      fullnameOverride: "mariadb"
+      architecture: "standalone"
+      auth:
+        rootPassword: "YOUR_ROOT_PASSWORD"
+        password: "YOUR_PASSWORD"
+      primary:
+        resources:
+          requests:
+          cpu: 
+          memory: 
+          limits:
+          cpu:
+          memory:
+      service:
+        type: NodePort or PortForward
+        nodePort: YOUR_PORT
+      persistence:
+        enabled: false
+        #existingClaim:
+      volumePermissions:
+        enabled: true
+    ```
+- `Commit` and refresh.
 
-  </details>
+#### <ins>4:</ins>
+- <ins>*THIS STEP IS OPTIONAL FOR ADVANCED USERS*</ins> // Once you have done all these steps upthere you'll see that you have Dbs in your k8s cluster. And to make sure about that we need tools to test the connection before you move the next step.
+> [!note]
+> #### Installation guide
+> ###### MariaDB
+> - You need to download **`mySQL`** to test your connection.
+> - For installation check [this](https://github.com/nnbaocuong99/Database/tree/main/MariaDB)
+> ###### MongoDB
+> - With MongoDB we have so many different options, you can decide it.
+> - For installation check [this](https://github.com/nnbaocuong99/Database/tree/main/MongoDB)
 
-- `Commit` and refresh and your will have a Database in your k8s cluster
 
-<br>
+#### <ins>5: (Optional)</ins>
+- You can import your real data, or even fake data. I'm gonna use [Mockaroo](https://www.mockaroo.com/) create some basic data.
+- In case you using Mockaroo, fill it to generate your data then `Save as` `.CSV` or `.JSON`.
 
-### ✏️Part 3: Work with Db, practices
-#### 1. Download tools
-- Okay, so once you have done all these steps upthere, now you'll have a Database in your k8s cluster. To make sure about that we need to download tools to test the connection and you can move to the next step
-- With:
-  - MariaDB: You need to download **`mySQL`** to test your connection. and **`mySQLdump`** to dump and restore your data. For installation check [my guides](https://github.com/nnbaocuong99/Database/tree/main/MariaDB)
-  - MongoDB: About the test connection there are so many options so you can decide it, `dump` and `restore` You need to download MongoDatabaseTools. For installation check [my guides](https://github.com/nnbaocuong99/Database/tree/main/MongoDB)
+#### <ins>6:</ins>
+- After the databases have been created, we need to create a database within them. YES! You’re not wrong if you’ve followed along until this step. In the previous step, we just applied to get a database on the cluster, but it’s empty.
+- Explain a few small, simple steps I'll do next:
+  - Exec into the Database via Rancher terminal.
+  - Create Database, Table and insert Data
+  - For more syntax, please visit [dev.mysql.com](https://dev.mysql.com/doc/refman/8.4/en/sql-statements.html) and [mongodb.com/docs](https://www.mongodb.com/docs/manual/reference/command/).
 
-#### 2. Generate data `exec` into, create database and table
-- There are tons of websites where we can create fake data to insert, import into our Databases. In this case, I'm gonna use [Mockaroo](https://www.mockaroo.com/).
-- Just fill it to generate your data then `Save as` `.CSV` or `.JSON`. Check to make sure that file have datas.
-
-#### 3. Work
-- After the Databases has been created. Now we need to create a Database in that, because in the previous step we just apply to got a Database on the cluster, its empty in there. Here is a few small simple steps you should follow in this step:
-  - Step 1: Exec into the Database note via Rancher
-  - Step 2: Create Database
-  - Step 3: Create Table, insert Data
-
+#### <ins>7:</ins>
 - MariaDB:
   <details>
   
