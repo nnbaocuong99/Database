@@ -57,7 +57,7 @@
 - Install and setup ArgocD, create Namespace by follow [these steps](https://github.com/nnbaocuong99/k8s#2-1).
 - Change it to `LoadBalancer`
   ```yaml
-  kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+  $ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
   ```
 
 #### <ins>2:</ins>
@@ -161,29 +161,34 @@
   - For more syntax, please visit [dev.mysql.com](https://dev.mysql.com/doc/refman/8.4/en/sql-statements.html) and [mongodb.com/docs](https://www.mongodb.com/docs/manual/reference/command/).
 
 #### <ins>7:</ins>
-- MariaDB:
-  <details>
-  
-  - You can use **`Mysql Workbench`** to test the connection and work with it (Create DB, table,...), if you're following my method fill it like in the form below:
+##### MariaDB:
+- Use [**Mysql Workbench**](https://dev.mysql.com/downloads/workbench/) to test the connection and work with it. If you're following my method fill it like in the form below. or nevgative to MariaDB using Rancher. Select `mariadb-node` and `execute shell` to start it
 
-  ![image](https://github.com/nnbaocuong99/Database/assets/100349044/08f9cfb8-3c2f-4c6a-8d65-48d6523e658c)
+  <div align="center">
+      <img src="https://github.com/nnbaocuong99/Database/assets/100349044/08f9cfb8-3c2f-4c6a-8d65-48d6523e658c" alt="uvu" width="900"> </br> <sup>Using Workbench</sup>
+      <br>
+      <br>
+  </div>
 
-  - or nevgative to MariaDB using Rancher. Select `mariadb-node` and `execute shell` to start it
-   
-    
-  ![image](https://github.com/nnbaocuong99/Database/assets/100349044/25a1428a-d487-4a87-9cef-ed49a9596f04)
+  <div align="center">
+      <img src="https://github.com/nnbaocuong99/Database/assets/100349044/25a1428a-d487-4a87-9cef-ed49a9596f04" alt="uvu" width="900"> </br> <sup>Using Rancher</sup>
+      <br>
+      <br>
+  </div>
 
-
-  - Once we get into it. run this command with user: **`root`** and the following password in your `.yaml` file, in this case `root-password` in my `.yaml` is: `44Xb7YDFgKHgp7kYLXzb` (it will ask for password after you run the command)
-  ```mysql
-  mysql -u root -p
-  ```
-
-  - You can create database by run the following commnad below or use **`Mysql Workbench`**
+- Run this command with the following password in your `.yaml` file.
   ```ruby
-  create database example_name
+  $ mysql -u root -p
   ```
-  > the result gonna be: **`Query OK, 1 row affected (0.02 sec)`**
+- Create database by run the commnad below or use **`Mysql Workbench`**
+  ```ruby
+  # command
+  $ create database example_name
+
+  # result
+  $ Query OK, 1 row affected (0.02 sec)
+  ```
+ 
 
   - Use these command below to use and work with the database u just created:
   ```bash
