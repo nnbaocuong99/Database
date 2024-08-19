@@ -162,10 +162,6 @@
 
 #### <ins>7:</ins>
 ##### MariaDB:
-<details>
-<summary><samp>&#9776;</samp> Click to expand </summary>
-<br>
-
 - Use [**Mysql Workbench**](https://dev.mysql.com/downloads/workbench/) to test the connection and work with it. If you're following my method fill it like in the form below. or nevgative to MariaDB using Rancher. Select `mariadb-node` and `execute shell` to start it
 
   <div align="center">
@@ -232,9 +228,6 @@
       <br>
   </div>
 
-<br>
-</details>
-
 ##### MongoDB:
 > [!caution]
 > *(Coming soon) I'm currently working to fix this errors asap. Because of some errors, so I'm still trying. Thankss for your patience.*
@@ -276,6 +269,8 @@
 
 <br>
 
+#### <ins>2:</ins>
+
 ***MongoDB***
 
 - Update the package list for upgrades and new package installations:
@@ -294,130 +289,152 @@
   ```nginx
   $ sudo nano /etc/mongodb.conf
   ```
-  > Inside the configuration file, look for the bind_ip directive and change its value to the IP address you want MongoDB to listen on. If you want MongoDB to listen on all available IP addresses, set it to `0.0.0.0`
-
+  > *Inside the configuration file, look for the bind_ip directive and change its value to the IP address you want MongoDB to listen on. If you want MongoDB to listen on all available IP addresses, set it to `0.0.0.0`*
 
 - Save the changes and restart MongoDB to apply the configuration changes:
    ```nginx
    $ sudo systemctl restart mongodb
    ```
 
+<br>
 
+#### <ins>3:</ins>
 
-<!--
-#### 3. Work with MongoDB, MariaDB
+##### MariaDB
 
-- MongoDB
-
-  <details>
-
-  - After the installations, starting by run the command:
-  ```
-  mongo
-  ```
-  
-  - Run the commands to show the databases you're having
-  ```
-  show dbs
-  ```
-  
-  - Run the command to use or create a db if you havent created one
-  ```
-  use db_name | in this case im using "use test_mongo"
-  ```
-  
-    ![image](https://github.com/nnbaocuong99/Database/assets/100349044/c37f0024-8214-401b-9642-d193ca8ade31)  
-
-  - Insert data into it by runny the follwing syntax
-  ```
-  db.items.insertOne({document})
-  db.items.insertMany([{document 1}, {document 2}])
-  ```
-
-  - In this case im gonna insert a name list have 3 people and ID, age with 2 methods `insertOne` & `insertMany`
-  - Result will be:
-
-    ![image](https://github.com/nnbaocuong99/Database/assets/100349044/fece2e2d-f9d5-4df9-9bb5-3ebc917c6eee)
-
-  - Dump and restore data
-    - Here are the dump and restore command and the result:
-    ```
-    #dump, backup
-    mongodump -d test_mongo -o /backup
-
-    #restore
-    mongorestore --db test_mongo /backup/test_mongo
-    ```
-    
-    ![image](https://github.com/nnbaocuong99/Database/assets/100349044/7e591878-56cf-4edd-a6d4-6f99be044ee8)
- 
-  - Explain:
-    - I created a directory, folder name `backup` by running `mkdir backup`
-    - Then I ran the dump command up there to backup data and it will automatically create a folder name `test_mongo` included 2 files: `items.bson` and `items.metadata.json`
-    - Type `mongo` again and drop the `table` in the `test_mongo` to remove the data
-      
-    ![image](https://github.com/nnbaocuong99/Database/assets/100349044/02ac1b52-a17d-445f-a985-3212c01ddfeb)
-
-    - Then use the backup command to restore data into the `test_mongo` again. here is the results:
-      
-    ![image](https://github.com/nnbaocuong99/Database/assets/100349044/f1e3659f-cca2-491c-8ff5-3ce2bde9ddc6)
-
-  </details>
-
-- MariaDB
-
-  <details>
-  
-  - First you need to create one user with full permission although maria request to create a password during the installations. Check [this](https://www.hostinger.com/tutorials/mysql/how-create-mysql-user-and-grant-permissions-command-line) and following exactly same steps.
-  - Then start with this command. In this case I created an account and grant privileges for an account name `admin`
+- Create a `user` with FULL permission although maria request to create a password during the installations. Check [this](https://www.hostinger.com/tutorials/mysql/how-create-mysql-user-and-grant-permissions-command-line) and following exactly same steps.
+- Start with this command. In this case I created an account and grant privileges for an account name `admin`
   ```mysql
-  mysql -u admin -p
+  $ mysql -u admin -p
   ```
-  - Once you're logged in. Start with those command below to show databases
-  ```mysql
-  show databases;
+- Once you're logged in. Start with those command below to show databases and create one if you dont have 1.
+  ```nginx
+  $ show databases;
+  $ create database example_name;
   ```
+- To create table with the title of the columns and the quantity of them (how many, what kind of data,...etc). In this case my template just for and list with ID, first, last name, job and salary. For more about datatype for exmaple `varchar(16)` check [this](https://www.w3schools.com/mysql/mysql_datatypes.asp)
+  ```nginx
+  $ create table employee_list_2 (employee_id INT, firstname VARCHAR(16), lastname VARCHAR(16), jobtitle VARCHAR(16), salary VARCHAR(16));
+  ```
+- Imagine it might be a table with 5 columns like this and now you have to `insert` data into it thru each row. This command to insert data and values:
 
-  - To create your own databases (if you dont have 1)
-  ```mysql
-  create database example_name;
-  ```
+  <br>
 
-  - to create table with the title of the columns and the quantity of them (how many, what kind of data,...etc). In this case my template just for and list with ID, first, last name, job and salary. For more about datatype for exmaple `varchar(16)` check [this](https://www.w3schools.com/mysql/mysql_datatypes.asp)
-  ```
-  create table employee_list_2 (employee_id INT, firstname VARCHAR(16), lastname VARCHAR(16), jobtitle VARCHAR(16), salary VARCHAR(16));
-  ```
-  - Once your got this. Imagine it might be a table with 5 columns like this and now you have to `insert` data into it thru each row
-  
   | ID | First Name | Last Name | Job title | Salary |
   |----|------------|-----------|-----------|--------|
 
-  - Following these steps. im using this command to insert data and values:
-  ```
-  NSERT INTO employee_list_2 (employee_id, firstname, lastname, jobtitle, salary) VALUES ('1', 'Sigrid', 'Bowkett', 'Librarian', '51907');
+  <br>
+
+  ```nginx
+  $ INSERT INTO employee_list_2 (employee_id, firstname, lastname, jobtitle, salary) VALUES ('1', 'Sigrid', 'Bowkett', 'Librarian', '51907');
   ```
 
-  - Once you're done. Roll back by type `exit`. With me im gonna create a backup folder name `backup` cd into it and run the backup commnad and cat these file to make sure that my data was succesfully dumped. 
-  ```
-  mysqldump -u admin -p test > backup.sql
+- Once you're done. Roll back by type `exit`. With me im gonna create a backup folder name `backup` cd into it and run the backup commnad and cat these file to make sure that my data was succesfully dumped. 
+  ```nginx
+  $ mysqldump -u admin -p test > backup.sql
   ```
 
-  ![image](https://github.com/nnbaocuong99/Database/assets/100349044/a7ed32fe-9496-4627-874f-7e9b23be0d78)
+  <div align="center">
+      <img src="https://github.com/nnbaocuong99/Database/assets/100349044/a7ed32fe-9496-4627-874f-7e9b23be0d78" alt="uvu" width="800">
+      <br>
+      <br>
+  </div>
 
-  - And the you can get into your db and run the same command up there to drop your table. remove your data and start to practice the backup
+- And the you can get into your db and run the same command up there to drop your table. remove your data and start to practice the backup
   
-  ![image](https://github.com/nnbaocuong99/Database/assets/100349044/9bf8e545-dcbc-4bfe-b382-c30a44c3ec64)
-
-  - Ok. Now you're done. run this command to backup your data into your db again
+  <div align="center">
+      <img src="https://github.com/nnbaocuong99/Database/assets/100349044/9bf8e545-dcbc-4bfe-b382-c30a44c3ec64" alt="uvu" width="800">
+      <br>
+      <br>
+  </div>
+  
+- Ok. Now you're done. Backup your data into your db again
+  ```nginx
+  $ mysql -u admin -p test < backup.sql
   ```
-  mysql -u admin -p test < backup.sql
+  <div align="center">
+      <img src="https://github.com/nnbaocuong99/Database/assets/100349044/aadaee76-1248-4fdf-b993-da8baf4bd50c" alt="uvu" width="800">
+      <br>
+      <br>
+  </div>  
+
+##### MongoDB:
+- After the installations, starting by run the command:
+  ```nginx
+  $ mongo
   ```
   
-  ![image](https://github.com/nnbaocuong99/Database/assets/100349044/aadaee76-1248-4fdf-b993-da8baf4bd50c)
+- Show the databases you're having // use or create a db if you havent created one
+  ```nginx
+  $ show dbs
+  $ use db_name
+  ```
 
-  </details>
+  <div align="center">
+      <img src="https://github.com/nnbaocuong99/Database/assets/100349044/c37f0024-8214-401b-9642-d193ca8ade31" alt="uvu" width="950"> </br> <sup>in this case im using "test_mongo"</sup>
+      <br>
+      <br>
+  </div>  
+
+- Insert data into it
+  ```ruby
+  $ db.items.insertOne({document})
+  $ db.items.insertMany([{document 1}, {document 2}])
+  ```
+
+- In this case im gonna insert a name list have 3 people and ID, age with 2 methods *`insertOne` & `insertMany`*. Result will return as below
+  <div align="center">
+      <img src="https://github.com/nnbaocuong99/Database/assets/100349044/fece2e2d-f9d5-4df9-9bb5-3ebc917c6eee" alt="uvu" width="600">
+      <br>
+      <br>
+  </div> 
+
+- Dump and restore data *`--all`*
+  ```nginx
+  # Dump, backup
+  $ mongodump -d test_mongo -o /backup
+
+  # Restore
+  $ mongorestore --db test_mongo /backup/test_mongo
+  ```
+
+  <div align="center">
+      <img src="https://github.com/nnbaocuong99/Database/assets/100349044/7e591878-56cf-4edd-a6d4-6f99be044ee8" alt="uvu" width="900">
+      <br>
+      <br>
+  </div>   
+
+
+
+#### ✨Explain:
+> - I created a directory, folder name `backup` by running `mkdir backup`
+> - Then ran the dump command up there to backup data and it will automatically create a folder name `test_mongo` included 2 files: `items.bson` and
+>  `items.metadata.json`
+> - Type `mongo` again and drop the `table` in the `test_mongo` to remove the data
+>   <div align="left">
+>       <img src="https://github.com/nnbaocuong99/Database/assets/100349044/02ac1b52-a17d-445f-a985-3212c01ddfeb" alt="uvu" width="300">
+>       <br>
+>       <br>
+>   </div> 
+> - Then use the `backup command` to restore data into the `test_mongo` again. here is the results:
+>   <div align="center">
+>       <img src="https://github.com/nnbaocuong99/Database/assets/100349044/f1e3659f-cca2-491c-8ff5-3ce2bde9ddc6" alt="uvu" width="750">
+>       <br>
+>       <br>
+>   </div>      
+  
+
+---
 
 <br>
+
+### ✨ Install Master-slave for MariaDB, Replicaset for MongoDB
+> [!warning]
+> - *This is optional in this project!*
+> - *Configuring can be considered intermediate to advanced skills*
+
+
+
 
 ---
 
@@ -541,4 +558,4 @@ argocd app get <app-name>
 This command will display the current status of the application deployment.
 -->
 
--->
+
