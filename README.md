@@ -162,6 +162,10 @@
 
 #### <ins>7:</ins>
 ##### MariaDB:
+<details>
+<summary><samp>&#9776;</samp> Click to expand </summary>
+<br>
+
 - Use [**Mysql Workbench**](https://dev.mysql.com/downloads/workbench/) to test the connection and work with it. If you're following my method fill it like in the form below. or nevgative to MariaDB using Rancher. Select `mariadb-node` and `execute shell` to start it
 
   <div align="center">
@@ -177,12 +181,12 @@
   </div>
 
 - Run this command with the following password in your `.yaml` file.
-  ```ruby
+  ```nginx
   $ mysql -u root -p
   ```
 
 - Create database by run the command below or use **`Mysql Workbench`**
-  ```ruby
+  ```nginx
   # command
   $ create database example_name
 
@@ -191,7 +195,7 @@
   ```
  
 - Use these command below: (read the # each)
-  ```ruby
+  ```nginx
   # Show all the database
   $ show databases;
 
@@ -206,7 +210,7 @@
   ``` 
 
 - Dump / backup and restore with `--all` (for more dump and restore options, check [this](https://mariadb.com/kb/en/mariadb-dump/))
-  ```ruby
+  ```nginx
   # Dump
   $ mysqldump -u admin -p test > backup.sql
 
@@ -227,11 +231,12 @@
       <br>
       <br>
   </div>
-    
+
+<br>
+</details>
 
 ##### MongoDB:
-
-> [!warning]
+> [!caution]
 > *(Coming soon) I'm currently working to fix this errors asap. Because of some errors, so I'm still trying. Thankss for your patience.*
 
 ---  
@@ -240,120 +245,66 @@
 
 ### ✨ Install and work with Database <ins>on VPS</ins>
 
-<!--
-#### 1.Prepare a VM <sup>In this case im gonna use the same script but with the `focal 20.04` version</sup>
-###### Scripts
+#### <ins>1:</ins>
 
-<details>
+***MariaDB***
 
-```ruby
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
+> [!Warning]
+> - *During the installation, you will be prompted to set a `root password` for MariaDB. Enter a secure password and remember it, as you will need it later.*
+> - *Based on your requirements, different versions could be chosen.*
 
-# All Vagrant configuration is done below. The "2" in Vagrant.configure
-# configures the configuration version (we support older styles for
-# backwards compatibility). Please don't change it unless you know what
-# you're doing.
-
-Vagrant.configure("2") do |config|
-  config.vm.box = "ubuntu/focal64"
-
-  config.vm.define "master" do |master|
-    config.vm.network "private_network", ip: "192.168.56.203"
-    master.vm.hostname = "db-vps-20.04"
-    master.vm.provider "virtualbox" do |vb|
-        vb.name = "db-vps-20.04"
-        vb.memory = 3096
-        vb.cpus = 3
-    end
-  end
-
-  # Chạy các lệnh shell
-  config.vm.provision "shell", inline: <<-SHELL
-    # Đặt pass 123 có tài khoản root và cho phép SSH
-    useradd cuongnnb
-    usermod -aG sudo cuongnnb
-    #usermod -aG docker cuongnnb
-    echo "cuongnnb:123" | sudo chpasswd
-    sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
-    systemctl reload sshd
-    # Ghi nội dung sau ra file /etc/hosts để truy cập được các máy theo HOSTNAME
-    echo "192.168.56.200 master-ubuntu-20.04" >> /etc/hosts
-    echo "192.168.56.201 worker-node1-ubuntu-20.04" >> /etc/hosts
-
-    #cài đặt docker và kubernetes
-    sudo apt-get update
-    sudo apt-get upgrade -y
-    sudo apt install docker.io -y
-    usermod -aG docker cuongnnb
-  SHELL
-end
-```
-
-</details>
-
-#### 2. Install MongoDB, MariaDB
-
-- MongoDB:
-
-  I ran the following command, and MariaDB was successfully installed.
-  - Update the package list for upgrades and new package installations:
-  ```ruby
-  sudo apt update
+- Update the package list for upgrades and new package installations:
+  ```nginx
+  $ sudo apt update
   ```
-  - Install MongoDB:
-  ```ruby
-  sudo apt install mongodb
+- Install MariaDB by running the following command:
+  ```nginx
+  $ sudo apt install mariadb-server
   ```
-  - *Optional* | MongoDB will start automatically. However, you can verify its status:
-  ```ruby
-  sudo systemctl status mongodb
+- After the installation is complete, MariaDB should be start automatically. However, you can verify its status:
+  ```nginx
+  $ sudo systemctl status mariadb
   ```
-  - With default configuration, MongoDB listens on the localhost interface. To access it from external machines, you may need to modify the MongoDB configuration. 
-  ```ruby
-  sudo nano /etc/mongodb.conf
+- Secure your MariaDB installation by running the following command:
+  ```nginx
+  $ sudo mysql_secure_installation
+  ```
+- Access:
+  ```yaml
+  $ sudo mysql -u root -p
+  ```
+
+<br>
+
+***MongoDB***
+
+- Update the package list for upgrades and new package installations:
+  ```nginx
+  $ sudo apt update
+  ```
+- Install MongoDB:
+  ```nginx
+  $ sudo apt install mongodb
+  ```
+- *Optional* | MongoDB will start automatically. However, you can verify its status:
+  ```nginx
+  $ sudo systemctl status mongodb
+  ```
+- With default configuration, MongoDB listens on the localhost interface. To access it from external machines, you may need to modify the MongoDB configuration. 
+  ```nginx
+  $ sudo nano /etc/mongodb.conf
   ```
   > Inside the configuration file, look for the bind_ip directive and change its value to the IP address you want MongoDB to listen on. If you want MongoDB to listen on all available IP addresses, set it to `0.0.0.0`
 
-  - Save the changes and restart MongoDB to apply the configuration changes:
-   ```ruby
-   sudo systemctl restart mongodb
+
+- Save the changes and restart MongoDB to apply the configuration changes:
+   ```nginx
+   $ sudo systemctl restart mongodb
    ```
 
 
-- MariaDB:
 
-  Same things with Mongo, MariaDB was successfully installed. Here are the commands:
-
-  - Update the package list for upgrades and new package installations:
-  ```ruby
-  sudo apt update
-  ```
-
-  - Install MariaDB by running the following command:
-  ```ruby
-  sudo apt install mariadb-server
-  ```
-
-  > **Warning** During the installation, you will be prompted to set a root password for MariaDB. Enter a secure password and remember it, as you will need it later.
-
-  - After the installation is complete, MariaDB should be start automatically. However, you can verify its status:
-  ```ruby
-  sudo systemctl status mariadb
-  ```
-
-  - Secure your MariaDB installation by running the following command:
-  ```ruby
-  sudo mysql_secure_installation
-  ```
-
-  > This command will guide you through a series of prompts to configure some security settings. It's recommended to answer "Y" to all the prompts, including removing anonymous users, disallowing remote root login, removing test databases, and reloading privilege tables.
-
-  - Access:
-  ```ruby
-  sudo mysql -u root -p
-  ```
-
+<!--
 #### 3. Work with MongoDB, MariaDB
 
 - MongoDB
@@ -588,5 +539,6 @@ Monitor the deployment by checking the status of the application in the ArgoCD U
 argocd app get <app-name>
 ```
 This command will display the current status of the application deployment.
+-->
 
 -->
