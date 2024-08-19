@@ -180,7 +180,8 @@
   ```ruby
   $ mysql -u root -p
   ```
-- Create database by run the commnad below or use **`Mysql Workbench`**
+
+- Create database by run the command below or use **`Mysql Workbench`**
   ```ruby
   # command
   $ create database example_name
@@ -189,51 +190,57 @@
   $ Query OK, 1 row affected (0.02 sec)
   ```
  
+- Use these command below: (read the # each)
+  ```ruby
+  # Show all the database
+  $ show databases;
 
-  - Use these command below to use and work with the database u just created:
-  ```bash
-  #show all the database in it
-  show databases;
+  # Use the database you want
+  $ use database_name;
 
-  #use the database you want
-  use database_name;
+  # Create a table (in this case, I've created a table with 5 columns and inserted values through each line).
+  $ create table employee_list_2 (employee_id INT, firstname VARCHAR(16), lastname VARCHAR(16), jobtitle VARCHAR(16), salary VARCHAR(16));
 
-  #create a table (in this case, I've created a table with 5 columns and inserted values through each line).
-  create table employee_list_2 (employee_id INT, firstname VARCHAR(16), lastname VARCHAR(16), jobtitle VARCHAR(16), salary VARCHAR(16));
-
-  #insert data into the table
-  INSERT INTO employee_list_2 (employee_id, firstname, lastname, jobtitle, salary) VALUES ('1', 'Sigrid', 'Bowkett', 'Librarian', '51907');
+  # Insert data into the table
+  $ INSERT INTO employee_list_2 (employee_id, firstname, lastname, jobtitle, salary) VALUES ('1', 'Sigrid', 'Bowkett', 'Librarian', '51907');
   ``` 
 
-  - Move on the next step. Dump / backup and restore data into the db (the commands i've been using)
-  ```mysql
-  #dump
-  mysqldump -u admin -p test > backup.sql
+- Dump / backup and restore with `--all` (for more dump and restore options, check [this](https://mariadb.com/kb/en/mariadb-dump/))
+  ```ruby
+  # Dump
+  $ mysqldump -u admin -p test > backup.sql
 
-  #restore
-  mysql -u admin -p test < backup.sql
+  # Restore
+  $ mysql -u admin -p test < backup.sql
   ```
 
-  ![image](https://github.com/nnbaocuong99/Database/assets/100349044/0d25fc25-cad8-4b81-9e41-744105a59cb4)
+  <div align="center">
+      <img src="https://github.com/nnbaocuong99/Database/assets/100349044/0d25fc25-cad8-4b81-9e41-744105a59cb4" alt="uvu" width="1000">
+      <br>
+      <br>
+  </div>
 
-  - Result:
+- Result:
+
+  <div align="center">
+      <img src="https://github.com/nnbaocuong99/Database/assets/100349044/94a7eb54-4469-40dc-bc69-51aaa2a6bbd8" alt="uvu" width="1000">
+      <br>
+      <br>
+  </div>
     
-  ![image](https://github.com/nnbaocuong99/Database/assets/100349044/94a7eb54-4469-40dc-bc69-51aaa2a6bbd8)
 
+##### MongoDB:
 
-  </details>
+> [!warning]
+> *(Coming soon) I'm currently working to fix this errors asap. Because of some errors, so I'm still trying. Thankss for your patience.*
 
-- MongoDB:
-  <details>
-
-  (Coming soon) I'm currently working to fix this errors asap. Because of some errors, so I'm still trying. Thankss for your patience.
-  
-  </details>
+---  
 
 <br>
 
-### ✏️Part 4: Install Databases on VPS
+### ✨ Install and work with Database <ins>on VPS</ins>
 
+<!--
 #### 1.Prepare a VM <sup>In this case im gonna use the same script but with the `focal 20.04` version</sup>
 ###### Scripts
 
