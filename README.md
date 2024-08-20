@@ -18,18 +18,23 @@
 <br>
 
 ### ✨<ins>***2. Todo list, Table of contents***</ins>:
-***On K8s***
-- [x] Deloy Database on k8s:
-- [ ] ~~Mongodb~~
-- [x] Mariadb
-- [x] Pratices / Dump data
+***1. On K8s***
+- [x] Deloy on k8s:
+  - [x] *Mariadb*
+  - [ ] *~~Mongodb~~*
+- [x] Dump, Restore data
 
-***On VPS***
+<br>
+
+***2. On VPS***
 - [x] Deploy Database on VPS:
-- [x] Mongodb
-- [x] Mariadb
+  - [x] *Mariadb*
+  - [x] *Mongodb*
+- [x] Dump, Restore data
 
-***Advanced, Optional***
+<br>
+
+***3. Advanced, Optional***
 - [x] Covert, install Replicaset, Masterslave
 
 ---
