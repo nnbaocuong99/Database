@@ -30,7 +30,7 @@
 - [x] Mariadb
 
 ***Advanced, Optional***
-- [ ] Covert, install Replicaset, Masterslave
+- [x] Covert, install Replicaset, Masterslave
 
 ---
 
@@ -429,6 +429,32 @@
 <br>
 
 ### ✨ Install Master-slave for MariaDB, Replicaset for MongoDB
+
+<br>
+
+***The set up for HA (High Availability) is a design plus its corresponding implementation organizations would undertake so as to ensure that they have some level of operational continuity over a specified period. HA is critical in the context of databases and IT systems since it allows organizations to run their operations continuously without having any downtime.***
+
+<br>
+
+***Key Components of HA:***
+
+- **Redundancy**: Multiple instances of critical components are deployed to eliminate single points of failure.
+- **Failover**: Automatic switching to a redundant or standby system upon the failure of the primary system.
+- **Load Balancing**: Distribution of workloads across multiple computing resources to optimize resource use and minimize response time.
+- **Data Replication**: Continuous copying of data from one database or server to another to ensure data consistency across systems.
+- **Monitoring and Alerting**: Continuous monitoring of system health and performance, with alerts for potential issues.
+
+<br>
+
+***Benefits of HA:***
+
+- **Minimized Downtime**: Ensures continuous operation even in the maintenance.
+- **Improved Reliability**: Reduces the risk of data loss and service interruptions.
+- **Better Performance**: Load balancing can improve overall system performance.
+- **Scalability**: Easier to scale resources.
+
+<br>
+
 > [!warning]
 > - My configuration is stored at [HA-Setup](https://github.com/nnbaocuong99/Database/tree/main/HA-Setup)
 > - *This is optional in this project!*
@@ -443,7 +469,7 @@
   $ sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf
   ```
 
-- For the `Masternode` copy the `mariadb.cnf` in the master folder or find and modify the following lines:
+- Copy the config below or in `mariadb.cnf` in the master folder // Find and modify the following lines:
   ```mysql
   [mysqld]
   server-id = 1          # Unique ID for the master
@@ -468,7 +494,7 @@
   $ EXIT;
   ```
 
-- For `Slavenode`. Copy the `mariadb.cnf` in the slave folder or find and modify the following lines:
+- Copy the config below or in `mariadb.cnf` in the slave folder // Find and modify the following lines:
   ```mysql
   [mysqld]
   server-id = 2          # Unique ID for the slave
@@ -507,9 +533,25 @@
 <br>
 
 #### <ins>MongoDB:</ins>
-- Access the config file, copy the config from `master folder` then restart to apply the config
+- Access the config file
   ```nginx
   $ nano /etc/mongod.conf
+  ```
+
+- Copy the config below or in `mongod.cnf` copy the config.
+  ```yaml
+  replication:
+  replSetName: "rs0"
+  ```
+  
+  <div align="center">
+      <img src="https://github.com/user-attachments/assets/f38b4527-5477-432b-bf4c-5cec7b111ebe" alt="uvu" width="700">
+      <br>
+      <br>
+  </div> 
+
+- Restart to apply the config
+  ```nginx
   $ systemctl restart mongod
   ```
 
@@ -519,19 +561,39 @@
   $ rs.initiate()
   ```
 
-- Add replica:
+- Add replica-set
   ```ruby
   $ rs.add(“mongo-db2:27017”)
   $ rs.add(“mongo-db3:27017”)
   ```
 
-- Once you add the nodes, you will see the output as {‘ok’:1}, which indicates a successful addition of nodes in the replica set. Check by running
+> [!tip]
+> - *Replace `"server1"`, `"server2"`, and `"server3"` with your actual server hostnames or IP addresses.*
+> - *In this case, mine was `db1`, `db2`,...*
+>   ```yaml
+>   rs.initiate({
+>     _id: "rs0",
+>     members: [
+>       { _id: 0, host: "server1:27017" },
+>       { _id: 1, host: "server2:27017" },
+>       { _id: 2, host: "server3:27017" }
+>     ]
+>   })
+>   ```
+
+- **OPTIONAL** To make sure a specific member-node becomes the primary:
+  ```nginx
+  cfg = rs.conf()
+  cfg.members[0].priority = 2
+  rs.reconfig(cfg)
+  ```
+
+- Once you add the nodes, you will see the output as `{‘ok’:1}`, which indicates a successful addition of nodes in the replica set. Check it by running
   ```sh
   $ rs.status()
   ```
 
-- If your output look ike this, congrats
-
+- If your output look ike this, congrats!
   ```yaml
   { 
   "set" : "myitsocial", 
@@ -561,7 +623,7 @@
         "lastHeartbeat" : ISODate("2022-02-10T06:15:02Z"), 
         "lastHeartbeatRecv" : ISODate("2014-08-12T06:15:02Z"), 
         "pingMs" : 0, 
-     "syncingTo" : "10.20.30.40:27017" 
+        "syncingTo" : "10.20.30.40:27017" 
      },
      { 
         "_id" : 2, 
@@ -574,7 +636,7 @@
         "lastHeartbeat" : ISODate("2022-02-10T06:15:02Z"), 
         "lastHeartbeatRecv" : ISODate("2022-02-10T06:15:02Z"), 
         "pingMs" : 0, 
-        "syncingTo" : "192.168.0.29:27017" 
+        "syncingTo" : "192.168.56.200:27017" 
      } 
   ], 
   "ok" : 1 
