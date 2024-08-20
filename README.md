@@ -433,10 +433,148 @@
 > - My configuration is stored at [HA-Setup](https://github.com/nnbaocuong99/Database/tree/main/HA-Setup)
 > - *This is optional in this project!*
 > - *Configuring can be considered intermediate to advanced skills*
+> - *You can create a consistent backup of the master database using your preferred method (e.g., mysqldump, XtraBackup) and transfer the backup file to the slave server.*
 
+<br>
 
+#### <ins>MariaDB:</ins>
+- run this command:
+  ```nginx
+  $ sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf
+  ```
 
+- For the `Masternode` copy the `mariadb.cnf` in the master folder or find and modify the following lines:
+  ```mysql
+  [mysqld]
+  server-id = 1          # Unique ID for the master
+  log-bin = /var/log/mysql/mysql-bin.log
+  binlog_do_db = your_database_name
+  ```
+  
+- Restart to apply the config
+  ```nginx
+  $ sudo systemctl restart mariadb
+  ```
 
+- Setup the master node
+  ```nginx
+  # Login
+  $ sudo mysql -u root -p
+
+  # Create replication user
+  $ CREATE USER 'replication_user'@'%' IDENTIFIED BY 'password';
+  $ GRANT REPLICATION SLAVE ON *.* TO 'replication_user'@'%';
+  $ FLUSH PRIVILEGES;
+  $ EXIT;
+  ```
+
+- For `Slavenode`. Copy the `mariadb.cnf` in the slave folder or find and modify the following lines:
+  ```mysql
+  [mysqld]
+  server-id = 2          # Unique ID for the slave
+  ```
+
+- Setup the slave node
+  ```nginx
+  # Login
+  $ sudo mysql -u root -p
+
+  # Setup command
+  CHANGE MASTER TO MASTER_HOST='master_ip_address',
+  MASTER_USER='replication_user',
+  MASTER_PASSWORD='password',
+  MASTER_LOG_FILE='binlog_file_from_master',
+  MASTER_LOG_POS=binlog_position_from_master;
+  ```
+
+- Run the slave, check slave:
+  ```nginx
+  START SLAVE;
+  SHOW SLAVE STATUS \G;
+  ```
+  
+  <div align="center">
+      <img src="https://github.com/user-attachments/assets/3eaae724-2fd9-4b59-9b2a-004cbdf3139f" alt="uvu" width="500">
+      <br>
+      <br>
+  </div> 
+
+<br>
+
+#### <ins>MongoDB:</ins>
+- Access the config file, copy the config from `master folder` then restart to apply the config
+  ```nginx
+  $ nano /etc/mongod.conf
+  $ systemctl restart mongod
+  ```
+
+- Log in to the primary node
+  ```sh
+  $ mongo
+  $ rs.initiate()
+  ```
+
+- Add replica:
+  ```ruby
+  $ rs.add(“mongo-db2:27017”)
+  $ rs.add(“mongo-db3:27017”)
+  ```
+
+- Once you add the nodes, you will see the output as {‘ok’:1}, which indicates a successful addition of nodes in the replica set. Check by running
+  ```sh
+  $ rs.status()
+  ```
+
+- If your output look ike this, congrats
+
+  ```yaml
+  { 
+  "set" : "myitsocial", 
+  "date" : ISODate("2022-02-10T06:15:02Z"), 
+  "myState" : 1, 
+  "members" : [ 
+     { 
+        "_id" : 0, 
+        "name" : "192.168.56.200:27017", 
+        "health" : 1, 
+        "state" : 1, 
+        "stateStr" : "PRIMARY", 
+        "uptime" : 303165, 
+        "optime" : Timestamp(1644516902, 1), 
+        "optimeDate" : ISODate("2022-02-10T06:15:02Z"), 
+        "self" : true 
+     }, 
+     { 
+        "_id" : 1, 
+        "name" : "192.168.56.201:27017", 
+        "health" : 1, 
+        "state" : 2, 
+        "stateStr" : "SECONDARY", 
+        "uptime" : 302985, 
+        "optime" : Timestamp(1644516902, 1), 
+        "optimeDate" : ISODate("2022-02-10T06:15:02Z"), 
+        "lastHeartbeat" : ISODate("2022-02-10T06:15:02Z"), 
+        "lastHeartbeatRecv" : ISODate("2014-08-12T06:15:02Z"), 
+        "pingMs" : 0, 
+     "syncingTo" : "10.20.30.40:27017" 
+     },
+     { 
+        "_id" : 2, 
+        "name" : "192.168.56.202:27017", 
+        "health" : 1, "state" : 2, 
+        "stateStr" : "SECONDARY", 
+        "uptime" : 302985, 
+        "optime" : Timestamp(1644516902, 1), 
+        "optimeDate" : ISODate("2022-02-10T06:15:02Z"), 
+        "lastHeartbeat" : ISODate("2022-02-10T06:15:02Z"), 
+        "lastHeartbeatRecv" : ISODate("2022-02-10T06:15:02Z"), 
+        "pingMs" : 0, 
+        "syncingTo" : "192.168.0.29:27017" 
+     } 
+  ], 
+  "ok" : 1 
+  } 
+  ```
 ---
 
 <br>
