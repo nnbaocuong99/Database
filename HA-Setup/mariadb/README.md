@@ -1,3 +1,4 @@
+<!--
 #### Step 1: Install MariaDB on each VM
 
 #### Step 2: Configure
@@ -56,3 +57,4 @@ MASTER_LOG_POS=binlog_position_from_master;
 START SLAVE;
 SHOW SLAVE STATUS \G;
 ```
+-->
