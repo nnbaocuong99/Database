@@ -602,8 +602,8 @@
 - If your output look ike this, congrats!
   ```yaml
   { 
-  "set" : "myitsocial", 
-  "date" : ISODate("2022-02-10T06:15:02Z"), 
+  "set" : "test",
+  "date" : ISODate("2023-07-28T04:31:50.570Z"),
   "myState" : 1, 
   "members" : [ 
      { 
