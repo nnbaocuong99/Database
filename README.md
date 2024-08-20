@@ -430,6 +430,7 @@
 
 ### ✨ Install Master-slave for MariaDB, Replicaset for MongoDB
 
+<!--
 <br>
 
 ***The set up for HA (High Availability) is a design plus its corresponding implementation organizations would undertake so as to ensure that they have some level of operational continuity over a specified period. HA is critical in the context of databases and IT systems since it allows organizations to run their operations continuously without having any downtime.***
@@ -454,12 +455,17 @@
 - **Scalability**: Easier to scale resources.
 
 <br>
-
+-->
 > [!warning]
 > - My configuration is stored at [HA-Setup](https://github.com/nnbaocuong99/Database/tree/main/HA-Setup)
 > - *This is optional in this project!*
 > - *Configuring can be considered intermediate to advanced skills*
 > - *You can create a consistent backup of the master database using your preferred method (e.g., mysqldump, XtraBackup) and transfer the backup file to the slave server.*
+> - *Remember to allow incoming traffic to your VMs using UFW.*
+>   ```nginx
+>   ufw allow from x.x.x.x to any port 27017
+>   ufw allow from x.x.x.x to any port 27017
+>   ```
 
 <br>
 
