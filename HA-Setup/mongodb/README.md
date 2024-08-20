@@ -1,3 +1,4 @@
+<!--
 #### Step 1: Install Mongodb on each VM
 #### Step 2: Config 
 - Run the command below to access the config file, copy the config from master folder the restart to apply the config
@@ -77,3 +78,4 @@ If you're got sth like this, congrats
 "ok" : 1 
 } 
 ```
+-->
