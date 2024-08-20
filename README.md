@@ -19,17 +19,13 @@
 
 ### ✨<ins>***2. Todo list, Table of contents***</ins>:
 ***1. On K8s***
-- [x] Deloy on k8s:
-  - [x] *Mariadb*
-  - [ ] *~~Mongodb~~*
+- [x] *Deploy Mariadb*
+- [ ] *Deploy ~~Mongodb~~*
 - [x] Dump, Restore data
 
-<br>
-
 ***2. On VPS***
-- [x] Deploy Database on VPS:
-  - [x] *Mariadb*
-  - [x] *Mongodb*
+- [x] *Deploy Mariadb*
+- [x] *Deploy Mongodb*
 - [x] Dump, Restore data
 
 <br>
