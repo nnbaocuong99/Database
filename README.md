@@ -487,12 +487,17 @@
   MASTER_LOG_POS=binlog_position_from_master;
   ```
 
-- Run the slave, check slave:
+- Run the slave, and check the status
   ```nginx
   START SLAVE;
   SHOW SLAVE STATUS \G;
   ```
-  
+
+- Look for and your're all done
+  ```yaml
+  Slave_IO_Running: Yes
+  Slave_SQL_Running: Yes
+  ```
   <div align="center">
       <img src="https://github.com/user-attachments/assets/3eaae724-2fd9-4b59-9b2a-004cbdf3139f" alt="uvu" width="500">
       <br>
