@@ -430,6 +430,7 @@
 
 ### ✨ Install Master-slave for MariaDB, Replicaset for MongoDB
 > [!warning]
+> - My configuration is stored at [HA-Setup](https://github.com/nnbaocuong99/Database/tree/main/HA-Setup)
 > - *This is optional in this project!*
 > - *Configuring can be considered intermediate to advanced skills*
 
