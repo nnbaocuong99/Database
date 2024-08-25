@@ -1,4 +1,9 @@
+# Output
+
 ### VM master
+
+<details>
+
 ```ruby
 spagb@DESKTOP-KJ54NK3 MINGW64 ~/OneDrive/Desktop/Database/VM Scripts/master-node (main)
 $ vagrant up
@@ -490,9 +495,14 @@ spagb@DESKTOP-KJ54NK3 MINGW64 ~/OneDrive/Desktop/Database/VM Scripts/master-node
 $
 ```
 
+</details>
+
 <br>
 
 ### VM worker
+
+<details>
+
 ```ruby
 spagb@DESKTOP-KJ54NK3 MINGW64 ~/OneDrive/Desktop/Database/VM Scripts/woker-node (main)
 $ vagrant up
@@ -982,3 +992,5 @@ Bringing machine 'worker' up with 'virtualbox' provider...
 spagb@DESKTOP-KJ54NK3 MINGW64 ~/OneDrive/Desktop/Database/VM Scripts/woker-node (main)
 $
 ```
+
+</details>
